@@ -27,31 +27,21 @@ public class Donut extends MenuItem implements Customizable{
         return false;
     }
 
-    public void itemPrice(){
+    public double itemPrice(){
         //size
         switch(this.type){
             case "YeastDonut": this.price = 1.39;
             break;
-            case "CakeDonut": this.price += 1.59;
+            case "CakeDonut": this.price = 1.59;
             break;
-            case "DonutHoles": this.price += 0.33;
+            case "DonutHoles": this.price = 0.33;
         }
         //decimal 
         this.price =  Math.floor(this.price * 100) / 100;
+        return this.price;
     }
 
     public double getPrice(){
-
-        switch(this.type){
-            case "Yeast Donut": this.price = 1.39;
-            break; 
-            case "Cake Donut": this.price += 1.59;
-            break;
-            case "Donut Holes": this.price += 0.33;
-        }
-        //decimal 
-        this.price =  Math.floor(this.price * 100) / 100;
-
         return this.price;
     }
 

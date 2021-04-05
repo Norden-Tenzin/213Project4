@@ -45,7 +45,7 @@ public class Coffee extends MenuItem implements Customizable{
         this.addIn = temp;
      }
 
-    public void itemPrice(){
+    public double itemPrice(){
         //size
         switch(this.size){
             case "Tall": this.price += 0.50;
@@ -58,6 +58,7 @@ public class Coffee extends MenuItem implements Customizable{
         this.price += this.addInCount * 0.20;
         //decimal 
         this.price =  Math.floor(this.price * 100) / 100;
+        return this.price;
     }
 
     public double getPrice(){
