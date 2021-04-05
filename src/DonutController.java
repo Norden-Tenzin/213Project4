@@ -114,6 +114,7 @@ public class DonutController {
         donutTypeSelect.setItems(donutTypes);
         ObservableList<String> yeastTypes = FXCollections.observableArrayList("Glazed", "Sugar", "Boston Creme");
         donutFlavorSelect.setItems(yeastTypes);
+        
         donutTypeSelect.getSelectionModel().select(0);
         donutFlavorSelect.getSelectionModel().select(0);
         

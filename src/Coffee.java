@@ -9,7 +9,7 @@ public class Coffee extends MenuItem implements Customizable{
 
     public Coffee (String size){
         this.setSize(size);
-        this.price = 1.99;
+        this.price = 0.0;
         this.addIn = new String[5];
         this.addInCount = 0;
     }
@@ -48,12 +48,16 @@ public class Coffee extends MenuItem implements Customizable{
     public double itemPrice(){
         //size
         switch(this.size){
-            case "Tall": this.price += 0.50;
+            case "Short": this.price = 1.99;
             break;
-            case "Grande": this.price += 1.00;
+            case "Tall": this.price = 1.99 + 0.50;
             break;
-            case "Venti": this.price += 1.50;
+            case "Grande": this.price = 1.99 + 1.00;
+            break;
+            case "Venti": this.price = 1.99 + 1.50;
+            break;
         }
+        
         //addin
         this.price += this.addInCount * 0.20;
         //decimal 
