@@ -1,3 +1,5 @@
+import javafx.scene.control.Menu;
+
 public class Order implements Customizable{
     private int orderNum;
     private MenuItem menuItems[];
@@ -55,6 +57,20 @@ public class Order implements Customizable{
         this.menuItems = temp;
     }
     
+    public double getSubtotal(){
+        double total = 0.0;
+        for(MenuItem mi: menuItems){
+            if(mi != null){
+                if(mi instanceof Coffee){
+                    total += ((Coffee)mi).getPrice();
+                } else if(mi instanceof Donut){
+                    total += ((Donut)mi).getPrice();
+                }
+            }
+        }
+        return total;
+    }
+
     public String toString(){
         String output = "";
         for(MenuItem mi: menuItems){
@@ -65,6 +81,7 @@ public class Order implements Customizable{
         return output;
     }
 
+    
     // public static void main(String[] args) {
     //     Order o = new Order();
     //     Coffee cf = new Coffee("Venti");
