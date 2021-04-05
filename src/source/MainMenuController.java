@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class MainMenuController {
 
-
    //  @FXML
     public void OrderCoffee(ActionEvent event) throws IOException {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Coffee.fxml"));

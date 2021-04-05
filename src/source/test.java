@@ -6,6 +6,5 @@ public class test {
         double total = 100;
 
         System.out.println((p/100.0)*total);
-
     }
 }
