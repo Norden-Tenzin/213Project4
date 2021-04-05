@@ -1,13 +1,12 @@
-import java.io.IOException;
+package source;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
 
 public class MainMenuController {
@@ -15,7 +14,7 @@ public class MainMenuController {
 
    //  @FXML
     public void OrderCoffee(ActionEvent event) throws IOException {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Coffee.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Coffee.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
       stage.setTitle("Order Donuts");
@@ -29,7 +28,7 @@ public class MainMenuController {
 
    //  @FXML
     public void OrderDoughnuts(ActionEvent event) throws IOException {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Donut.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Donut.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
       stage.setTitle("Order Donuts");
