@@ -13,7 +13,10 @@ import javafx.scene.control.TextArea;
 public class CoffeeController {
 
    private String addOnString ="";
-   
+   private String size;
+   private Coffee coffee;
+   private int coffeeQuantity;
+   private int coffeeAddOnQuantity;
 
     @FXML
     private ComboBox coffeeSizeSelect;
@@ -61,6 +64,9 @@ public class CoffeeController {
          addOnQuantity.setText("1");
       else
          addOnQuantity.setText((Integer.valueOf(addOnQuantity.getText()) - 1) + "");
+         coffeeAddOnQuantity = Integer.valueOf(addOnQuantity.getText());
+         //todo: change price
+         errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2);
     }
 
     @FXML
@@ -69,16 +75,25 @@ public class CoffeeController {
          quantity.setText("1");
       else
          quantity.setText((Integer.valueOf(quantity.getText()) - 1) + "");
+      coffeeQuantity=Integer.valueOf(quantity.getText());
+      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
     }
 
     @FXML
     void increaseAddOnQuantity(ActionEvent event) {
       addOnQuantity.setText((Integer.valueOf(addOnQuantity.getText()) + 1) + "");
+      coffeeAddOnQuantity = Integer.valueOf(addOnQuantity.getText());
+
+      //todo:change price
+      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2);
+
     }
 
     @FXML
     void increaseQuantity(ActionEvent event) {
       quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
+      coffeeQuantity=Integer.valueOf(quantity.getText());
+      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
     }
 
     @FXML
@@ -123,6 +138,9 @@ public class CoffeeController {
       coffeeSelectAddOn.setItems(addOns);
 
       coffeeSelectAddOn.getSelectionModel().select(0);
+      size = coffeeSizeSelect.getSelectionModel().getSelectedItem().toString();
+      coffee = new Coffee(size);
+      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
     }
 
 }
