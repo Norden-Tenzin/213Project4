@@ -11,12 +11,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+
 import static source.Main.currOrder;
 
 
-
 public class DonutController {
-
     private String type;
     private int orderQuantity;
     private String flavor;
@@ -35,7 +41,7 @@ public class DonutController {
     private TextArea errorBox;
 
     @FXML
-    private TextArea orderList;
+    private ListView orderList;
 
     @FXML
     private TextArea subtotalValue;
@@ -135,6 +141,29 @@ public class DonutController {
         errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
     }
 
+    // static class XCell extends ListCell<String> {
+    //     HBox hbox = new HBox();
+    //     Label label = new Label("");
+    //     Pane pane = new Pane();
+    //     Button button = new Button("Del");
 
-    
+    //     public XCell() {
+    //         super();
+    //         hbox.getChildren().addAll(label, pane, button);
+    //         HBox.setHgrow(pane, Priority.ALWAYS);
+    //         button.setOnAction(event -> getListView().getItems().remove(getItem()));
+    //     }
+
+    //     @Override
+    //     protected void updateItem(String item, boolean empty) {
+    //         super.updateItem(item, empty);
+    //         setText(null);
+    //         setGraphic(null);
+
+    //         if (item != null && !empty) {
+    //             label.setText(item);
+    //             setGraphic(hbox);
+    //         }
+    //     }
+    // }
 }
