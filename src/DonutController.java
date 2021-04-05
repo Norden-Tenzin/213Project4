@@ -64,7 +64,7 @@ public class DonutController {
         else
             quantity.setText((Integer.valueOf(quantity.getText()) - 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
-        errorBox.setText("Price: $"+orderQuantity * donut.getPrice() + "\n" + donut.getPrice());
+        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice() );
     }
 
     @FXML
@@ -72,14 +72,14 @@ public class DonutController {
       
         quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
-        errorBox.setText("Price: $"+orderQuantity * donut.getPrice() + "\n" + donut.getPrice());
+        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice() );
     }
 
     @FXML
     void selectFlavor(ActionEvent event) {
         flavor = donutFlavorSelect.getValue().toString();
         donut = new Donut(type,flavor);
-        errorBox.setText("Price: $"+orderQuantity * donut.getPrice() + "\n" + donut.getPrice());
+        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice() );
     }
 
     @FXML
@@ -99,7 +99,7 @@ public class DonutController {
         }
         type = donutTypeSelect.getSelectionModel().getSelectedItem().toString();
         donut = new Donut(type,flavor);
-        errorBox.setText("Price: $"+orderQuantity * donut.getPrice());
+        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
     }
 
     @FXML
@@ -122,7 +122,7 @@ public class DonutController {
         orderQuantity = 1;
 
         donut = new Donut(type,flavor);
-        errorBox.setText("Price: $"+orderQuantity * donut.getPrice());
+        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
     }
     
 }

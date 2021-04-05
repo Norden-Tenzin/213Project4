@@ -30,11 +30,11 @@ public class Donut extends MenuItem implements Customizable{
     public double itemPrice(){
         //size
         switch(this.type){
-            case "YeastDonut": this.price = 1.39;
+            case "Yeast Donut": this.price = 1.39;
             break;
-            case "CakeDonut": this.price = 1.59;
+            case "Cake Donut": this.price = 1.59;
             break;
-            case "DonutHoles": this.price = 0.33;
+            case "Donut Holes": this.price = 0.33;
         }
         //decimal 
         this.price =  Math.floor(this.price * 100) / 100;
