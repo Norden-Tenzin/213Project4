@@ -1,4 +1,5 @@
 import javafx.scene.control.Menu;
+import java.lang.Math;
 
 public class Order implements Customizable{
     private int orderNum;
@@ -6,8 +7,7 @@ public class Order implements Customizable{
     private int menuItemsCount;
     private int GROWSIZE = 5;
 
-    public Order(int orderNum){
-        this.orderNum = orderNum;
+    public Order(){
         this.menuItems = new MenuItem[GROWSIZE];
         this.menuItemsCount = 0;
     }
@@ -57,18 +57,38 @@ public class Order implements Customizable{
         this.menuItems = temp;
     }
     
+    public void setOrderNum(int orderNum){
+        this.orderNum = orderNum;
+    }
+
+    public int getOrderNum(){
+        return orderNum;
+    }
+
     public double getSubtotal(){
-        double total = 0.0;
+        double subTotal = 0.0;
         for(MenuItem mi: menuItems){
             if(mi != null){
                 if(mi instanceof Coffee){
-                    total += ((Coffee)mi).getPrice();
+                    subTotal += ((Coffee)mi).getPrice();
                 } else if(mi instanceof Donut){
-                    total += ((Donut)mi).getPrice();
+                    subTotal += ((Donut)mi).getPrice();
                 }
             }
         }
-        return total;
+        return subTotal;
+    }
+
+    public double getSalesTax(){
+        double subTotal = getSubtotal();
+        double percentage = 6.625;
+        return Math.floor(((percentage/100.0)*subTotal) * 100) / 100;
+    }
+
+    public double getTotal(){
+        double subTotal = getSubtotal();
+        double tax = getSalesTax();
+        return subTotal + tax;
     }
 
     public String toString(){
@@ -81,7 +101,6 @@ public class Order implements Customizable{
         return output;
     }
 
-    
     // public static void main(String[] args) {
     //     Order o = new Order();
     //     Coffee cf = new Coffee("Venti");

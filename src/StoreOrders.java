@@ -1,5 +1,5 @@
 public class StoreOrders implements Customizable{
-    private int startingOrderNum;
+    private int UniqueOrderNum;
     private Order orders[];
     private int ordersCount;
     private int GROWSIZE = 5;
@@ -7,39 +7,43 @@ public class StoreOrders implements Customizable{
     public StoreOrders(){
         orders = new Order[GROWSIZE];
         ordersCount = 0;
+        UniqueOrderNum = 1;
     }
 
-    // public int find(MenuItem item){
-    //     for(int i = 0; i < ordersCount; i++){
-    //         if(orders[i].toString().equals(item.toString())){
-    //             return i;
-    //         }
-    //     }
-    //     return -1;
-    // };
+    public int find(Order item){
+        for(int i = 0; i < ordersCount; i++){
+            if(orders[i].getOrderNum() == item.getOrderNum()){
+                return i;
+            }
+        }
+        return -1;
+    };
 
     public boolean add(Object obj){
         if (this.orders[this.orders.length - 1] != null)
            grow();
-        if(obj instanceof MenuItem){
-            menuItems[menuItemsCount] = (MenuItem)obj;
-            menuItemsCount ++;
+        if(obj instanceof Order){
+            Order temp = ((Order)obj);
+            temp.setOrderNum(UniqueOrderNum);
+            orders[ordersCount] = temp;
+            ordersCount ++;
+            UniqueOrderNum ++;
             return true;
         }
         return false;
     };
 
     public boolean remove(Object obj){
-        if(obj instanceof MenuItem){
-            int indexItem = find((MenuItem)obj);
+        if(obj instanceof Order){
+            int indexItem = find((Order)obj);
             if (indexItem == -1) {
                 return false;
             }
-            for (int i = indexItem + 1; i < this.menuItems.length; i++) {
-                this.menuItems[i - 1] = this.menuItems[i];
+            for (int i = indexItem + 1; i < this.orders.length; i++) {
+                this.orders[i - 1] = this.orders[i];
             }
-            if (this.menuItemsCount >= 0) {
-                this.menuItemsCount--;
+            if (this.ordersCount >= 0) {
+                this.ordersCount--;
             }
             return true;
         }
