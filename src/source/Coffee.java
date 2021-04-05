@@ -1,3 +1,5 @@
+package source;
+
 import java.lang.Math;
 
 public class Coffee extends MenuItem implements Customizable{

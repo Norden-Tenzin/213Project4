@@ -1,3 +1,5 @@
+package source;
+
 public class test {
     public static void main(String[] args) {
         double p = 10.0;

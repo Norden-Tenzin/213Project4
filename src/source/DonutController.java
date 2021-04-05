@@ -1,3 +1,5 @@
+package source;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -9,14 +11,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import static source.Main.currOrder;
+
+
 
 public class DonutController {
 
     private String type;
     private int orderQuantity;
     private String flavor;
-
-    private Donut donut = null;
+    private Donut donut;
 
     @FXML
     private TextField quantity;
@@ -64,7 +68,8 @@ public class DonutController {
         else
             quantity.setText((Integer.valueOf(quantity.getText()) - 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
-        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice() );
+        double price = orderQuantity * donut.itemPrice();
+        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
     @FXML
@@ -72,14 +77,16 @@ public class DonutController {
       
         quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
-        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice() );
+        double price = orderQuantity * donut.itemPrice();
+        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
     @FXML
     void selectFlavor(ActionEvent event) {
         flavor = donutFlavorSelect.getValue().toString();
         donut = new Donut(type,flavor);
-        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice() );
+        double price = orderQuantity * donut.itemPrice();
+        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
     @FXML
@@ -99,7 +106,8 @@ public class DonutController {
         }
         type = donutTypeSelect.getSelectionModel().getSelectedItem().toString();
         donut = new Donut(type,flavor);
-        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
+        double price = orderQuantity * donut.itemPrice();
+        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
     @FXML
@@ -123,6 +131,7 @@ public class DonutController {
         orderQuantity = 1;
 
         donut = new Donut(type,flavor);
+        // orders = new Order();
         errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
     }
     
