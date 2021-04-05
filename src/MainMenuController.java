@@ -21,7 +21,7 @@ public class MainMenuController {
 
    //  @FXML
     public void OrderDoughnuts(ActionEvent event) throws IOException {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Doughnuts.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Donut.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
       stage.setTitle("Order Donuts");
