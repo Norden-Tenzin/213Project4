@@ -96,6 +96,11 @@ public class DonutController {
     }
 
     @FXML
+    void submitOrder(ActionEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
         orderQuantity = Integer.valueOf(quantity.getText());
         ObservableList<String> donutTypes = FXCollections.observableArrayList("Yeast Donut", "Cake Donut", "Donut Holes");

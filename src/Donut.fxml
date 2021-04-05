@@ -65,7 +65,7 @@
                         <Button layoutX="243.0" layoutY="234.0" mnemonicParsing="false" onAction="#increaseQuantity" prefHeight="27.0" prefWidth="24.0" text="+" />
                         <Button layoutX="274.0" layoutY="234.0" mnemonicParsing="false" onAction="#decreaseQuantity" prefHeight="27.0" prefWidth="24.0" text="-" />
                         <TextField fx:id="quantity" editable="false" layoutX="126.0" layoutY="233.0" prefHeight="27.0" prefWidth="102.0" text="1" />
-                        <TextArea fx:id="errorBox" layoutX="2.0" layoutY="355.0" prefHeight="43.0" prefWidth="364.0" />
+                        <TextArea fx:id="errorBox" editable="false" layoutX="2.0" layoutY="355.0" prefHeight="43.0" prefWidth="364.0" wrapText="true" />
                         <ImageView fitHeight="72.0" fitWidth="186.0" layoutX="141.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/donut.png" />
@@ -75,9 +75,10 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextArea fx:id="orderList" layoutX="33.0" layoutY="36.0" prefHeight="259.0" prefWidth="200.0" />
-                        <TextArea fx:id="subtotalValue" layoutX="98.0" layoutY="306.0" prefHeight="43.0" prefWidth="135.0" />
+                        <TextArea fx:id="orderList" editable="false" layoutX="33.0" layoutY="36.0" prefHeight="259.0" prefWidth="200.0" wrapText="true" />
+                        <TextArea fx:id="subtotalValue" editable="false" layoutX="98.0" layoutY="306.0" prefHeight="17.0" prefWidth="128.0" />
                         <Label layoutX="33.0" layoutY="319.0" prefHeight="17.0" prefWidth="60.0" text="Subtotal:" />
+                        <Button layoutX="33.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitOrder" prefHeight="27.0" prefWidth="200.0" text="Submit Order" />
                      </children>
                   </AnchorPane>
               </items>
