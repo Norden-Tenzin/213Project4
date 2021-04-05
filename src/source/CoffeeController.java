@@ -20,6 +20,8 @@ public class CoffeeController {
    private int coffeeQuantity;
    private int coffeeAddOnQuantity;
 
+   private double cost;
+
     @FXML
     private ComboBox coffeeSizeSelect;
 
@@ -47,28 +49,37 @@ public class CoffeeController {
     @FXML
     void addToCart(ActionEvent event) {
       resetOrder(event);
+      coffeeAddOnQuantity = 0;
 
     }
 
     @FXML
     void addToOrder(ActionEvent event) {
-      if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None") && !addOnQuantity.getText().equals("0")){
+      if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None") || !addOnQuantity.getText().equals("0")){
          addOnString += addOnQuantity.getText() + "-"+coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString()+", ";
          addOnList.setText(addOnString);
       }
       addOnQuantity.setText("0");
       coffeeSelectAddOn.getSelectionModel().select(0);
+
+      addAddOn(coffeeAddOnQuantity, coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString());
+      cost = Math.floor((coffeeQuantity*coffee.itemPrice())*100)/100;
+      errorBox.setText("Price: $" + cost);
+      coffeeAddOnQuantity = 0;
     }
 
     @FXML
     void decreaseAddOnQuantity(ActionEvent event) {
       if(Integer.valueOf(addOnQuantity.getText())<=0)
-         addOnQuantity.setText("1");
+         addOnQuantity.setText("0");
       else
          addOnQuantity.setText((Integer.valueOf(addOnQuantity.getText()) - 1) + "");
          coffeeAddOnQuantity = Integer.valueOf(addOnQuantity.getText());
          //todo: change price
-         errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2);
+        if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None")){
+          cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
+        }
     }
 
     @FXML
@@ -78,7 +89,8 @@ public class CoffeeController {
       else
          quantity.setText((Integer.valueOf(quantity.getText()) - 1) + "");
       coffeeQuantity=Integer.valueOf(quantity.getText());
-      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
+      cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
     }
 
     @FXML
@@ -87,7 +99,10 @@ public class CoffeeController {
       coffeeAddOnQuantity = Integer.valueOf(addOnQuantity.getText());
 
       //todo:change price
-      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2);
+      if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None")){
+          cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
+      }
 
     }
 
@@ -95,22 +110,29 @@ public class CoffeeController {
     void increaseQuantity(ActionEvent event) {
       quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
       coffeeQuantity=Integer.valueOf(quantity.getText());
-      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
+      cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
     }
 
     @FXML
     void removeFromCart(ActionEvent event) {
-
+      
     }
 
     @FXML
     void selectAddOn(ActionEvent event) {
-
+      if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None")){
+        cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
+      }
     }
 
     @FXML
     void selectSize(ActionEvent event) {
-      
+      size = coffeeSizeSelect.getValue().toString();
+      coffee.setSize(size);
+      cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
     }
 
     @FXML
@@ -126,6 +148,13 @@ public class CoffeeController {
       coffeeSelectAddOn.getSelectionModel().select(0);
       addOnQuantity.setText("0");
       coffeeSizeSelect.getSelectionModel().select(0);
+
+      size = coffeeSizeSelect.getSelectionModel().getSelectedItem().toString();
+      coffee = new Coffee(size);
+      coffeeQuantity = 1;
+      coffeeAddOnQuantity=0;
+      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
+
     }
 
 
@@ -142,7 +171,17 @@ public class CoffeeController {
       coffeeSelectAddOn.getSelectionModel().select(0);
       size = coffeeSizeSelect.getSelectionModel().getSelectedItem().toString();
       coffee = new Coffee(size);
-      errorBox.setText("Price: $" + coffeeQuantity*coffee.itemPrice());
+      coffeeAddOnQuantity=0;
+      coffeeQuantity = 1;
+      cost = Math.floor((coffeeQuantity*coffee.itemPrice() + coffeeAddOnQuantity*.2)*100)/100;
+          errorBox.setText("Price: $" + cost);
     }
+
+    public void addAddOn(int quantity, String addOn){
+      for(int i=0;i<quantity;i++){
+          coffee.add(addOn);
+      }
+      System.out.println(coffee.getPrice());
+  }
 
 }
