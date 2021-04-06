@@ -1,7 +1,10 @@
 package source;
 
 import java.lang.Math;
-
+/**
+ * Class used to create a Coffee object. Handles adding add-ons, defining size, and pricing
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class Coffee extends MenuItem implements Customizable {
     private double price;
     private String size;
@@ -9,6 +12,10 @@ public class Coffee extends MenuItem implements Customizable {
     private int addInCount;
     private int GROWSIZE = 5;
 
+    /**
+     * Coffee constructor which takes in size and creates default values for addin, price and addin count.
+     * @param size of the coffee
+     */
     public Coffee(String size) {
         this.setSize(size);
         this.price = 0.0;
@@ -17,15 +24,17 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
-     * @param size
+     * sets the coffee size.
+     * @param size of the coffee
      */
     public void setSize(String size) {
         this.size = size;
     }
 
     /**
-     * @param obj
-     * @return boolean
+     * Adds add-ons to the coffee.
+     * @param obj that is to be added
+     * @return boolean true if added correctly, false otherwise.
      */
     public boolean add(Object obj) {
         if (this.addIn[this.addIn.length - 1] != null)
@@ -40,15 +49,16 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
-     * @param obj
-     * @return boolean
+     * @param obj that is removed
+     * @return boolean always returns true since it is not applicable in Coffee.
      */
-    // isn't used
     public boolean remove(Object obj) {
         return true;
     }
 
-    // grows
+    /**
+     * Grows the data structure to make room for the new values.
+     */
     private void grow() {
         String[] temp = new String[this.addIn.length + GROWSIZE];
 
@@ -59,7 +69,8 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
-     * @return double
+     * Handles pricing of the item by taking base cost and adding 20 cents for each additional add-on.
+     * @return double which represents the price of the item
      */
     public double itemPrice() {
         // size
@@ -86,16 +97,17 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
-     * @return double
+     * Returns the price of the item
+     * @return double which is the price
      */
     public double getPrice() {
         return this.price;
     }
 
     /**
-     * @return String
+     * Returns the formatted String
+     * @return String which outputs the item as well as the add-ons
      */
-    // tostring.
     public String toString() {
         String strAddIN = "";
         for (String str : addIn) {
@@ -104,13 +116,6 @@ public class Coffee extends MenuItem implements Customizable {
             }
         }
         return String.valueOf("$"+this.price + "," + this.size + " " + strAddIN);
-    }
-
-    public static void main(String[] args) {
-        Coffee cf = new Coffee("Grande");
-        cf.add("cream");
-        cf.itemPrice();
-        System.out.println(cf.toString());
     }
     
 }

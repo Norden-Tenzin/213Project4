@@ -6,13 +6,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+/**
+ * Main class that helps start the scene. It is also where current order is stored.
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class Main extends Application {
     public static Order currOrder = new Order();
     public static StoreOrders allOrders = new StoreOrders();
     
     
     /** 
+     * Handles starting the project and opening Main Menu.
      * @param primaryStage
      * @throws Exception
      */
@@ -26,6 +30,7 @@ public class Main extends Application {
     }
 
     /** 
+     * Helps launch the views.
      * @param args
      */
     public static void main(String[] args) {

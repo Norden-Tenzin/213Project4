@@ -17,9 +17,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import static source.Main.currOrder;
 
+/**
+ * Controller for the Coffee.fxml file. Handles UI logic.
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class CoffeeController {
 
     private String addOnString = "";
@@ -62,13 +65,13 @@ public class CoffeeController {
     private ImageView milkImg;
 
     /**
-     * @param event
+     * Handles when the add to cart button is pressed. 
+     * @param event when the add to cart button is pressed.
      */
     @FXML
     void addToCart(ActionEvent event) {
         for (int i = 0; i < coffeeQuantity; i++) {
             currOrder.add(coffee);
-            // orderList.getItems().add(coffee.toString());
         }
         loadData();
         resetOrder(event);
@@ -77,7 +80,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles the add-to order event which is when the user adds add-ons to the coffee.
+     * @param event when the user presses the add to order button.
      */
     @FXML
     void addToOrder(ActionEvent event) {
@@ -99,7 +103,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles decreasing the quantity of the add-on.
+     * @param event when the decrease button is pressed.
      */
     @FXML
     void decreaseAddOnQuantity(ActionEvent event) {
@@ -117,7 +122,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles decreasing the amount of coffee in the order.
+     * @param event is triggered when the quantity is decreased.
      */
     @FXML
     void decreaseQuantity(ActionEvent event) {
@@ -149,7 +155,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles increasing the quantity of coffee.
+     * @param event is triggered when the user increases the quantity of coffee.
      */
     @FXML
     void increaseQuantity(ActionEvent event) {
@@ -161,7 +168,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles removing an item from the cart.
+     * @param event is triggered when the user clicks the Remove From Cart button.
      */
     @FXML
     void removeFromCart(ActionEvent event) {
@@ -191,17 +199,14 @@ public class CoffeeController {
         }
         else
             errorBox.setText("Unable to remove from cart");
-        
-       
-
 
         loadData();
-        // ObservableList
         subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
-     * @param event
+     * Handles selecting the add-on from the drop-down menu
+     * @param event is triggered when the user clicks the dropdown menu and selects a choice.
      */
     @FXML
     void selectAddOn(ActionEvent event) {
@@ -213,7 +218,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles selecting the size of the coffee from the drop-down menu.
+     * @param event is triggered when the user clicks the dropdown menu and selects a size.
      */
     @FXML
     void selectSize(ActionEvent event) {
@@ -225,7 +231,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles submitting the order, thus closing the current scene.
+     * @param event is triggered when the user clicks the Submit button.
      */
     @FXML
     void submitOrder(ActionEvent event) {
@@ -234,7 +241,8 @@ public class CoffeeController {
     }
 
     /**
-     * @param event
+     * Handles resetting all the values in the order page.
+     * @param event is triggered when the user clicks the Reset Order button.
      */
     @FXML
     void resetOrder(ActionEvent event) {
@@ -253,6 +261,9 @@ public class CoffeeController {
         subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
+    /**
+     * Helper method for loading data into the listView
+     */
     private void loadData() {
         orderList.getItems().clear();
         lst.removeAll(lst);
@@ -263,6 +274,9 @@ public class CoffeeController {
         orderList.getItems().addAll(lst);
     }
 
+    /**
+     * Initialize values and set default values for variables.
+     */
     @FXML
     void initialize() {
 
@@ -305,8 +319,9 @@ public class CoffeeController {
     }
 
     /**
-     * @param quantity
-     * @param addOn
+     * Helper method for adding add-ons to a coffee
+     * @param quantity is the quantity of add-ons
+     * @param addOn is the name of the add-on
      */
     public void addAddOn(int quantity, String addOn) {
         for (int i = 0; i < quantity; i++) {

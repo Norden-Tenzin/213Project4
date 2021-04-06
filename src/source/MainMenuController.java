@@ -11,9 +11,13 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+/**
+ * Main menu controller used for the logic in the Main Menu fxml file.
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class MainMenuController {
 
   @FXML
@@ -30,10 +34,10 @@ public class MainMenuController {
 
    
    /** 
+    * Handles opening the order coffee scene.
     * @param event
     * @throws IOException
     */
-   //  @FXML
     public void OrderCoffee(ActionEvent event) throws IOException {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Coffee.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
@@ -49,10 +53,10 @@ public class MainMenuController {
 
    
    /** 
+    * Handles opening the order donuts page
     * @param event
     * @throws IOException
     */
-   //  @FXML
     public void OrderDoughnuts(ActionEvent event) throws IOException {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Donut.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
@@ -68,10 +72,10 @@ public class MainMenuController {
     
     
     /** 
+     * Handles opening the current orders page.
      * @param event
      * @throws IOException
      */
-    // @FXML
     public void OpenCurrentOrders(ActionEvent event) throws IOException {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../CurrentOrders.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
@@ -86,11 +90,11 @@ public class MainMenuController {
     }
 
     
-    /** 
+    /**
+     * Handles opening the store orders page. 
      * @param event
      * @throws IOException
      */
-    // @FXML
     public void OpenStoreOrder(ActionEvent event) throws IOException {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../StoreOrders.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
@@ -105,6 +109,9 @@ public class MainMenuController {
 
     }
 
+    /**
+     * Initializes default values and images.
+     */
     @FXML
     void initialize(){
       FileInputStream coffeeInput;

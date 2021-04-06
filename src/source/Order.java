@@ -3,20 +3,28 @@ package source;
 import javafx.scene.control.Menu;
 import java.lang.Math;
 
+/**
+ * Class for creating an order object. Implements customizable and helps price and organize orders.
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class Order implements Customizable {
     private int orderNum;
     private MenuItem menuItems[];
     private int menuItemsCount;
     private int GROWSIZE = 5;
 
+    /**
+     * Constructor for order.
+     */
     public Order() {
         this.menuItems = new MenuItem[GROWSIZE];
         this.menuItemsCount = 0;
     }
 
     /**
-     * @param item
-     * @return int
+     * Finds any given order in the data structure.
+     * @param item which is the menu item
+     * @return int which is the index of the menu item, -1 if not found.
      */
     public int find(MenuItem item) {
         for (int i = 0; i < menuItemsCount; i++) {
@@ -28,8 +36,9 @@ public class Order implements Customizable {
     };
 
     /**
-     * @param obj
-     * @return boolean
+     * Adds menu items to the data structure
+     * @param obj which is to be added
+     * @return boolean true if added successfully, false otherwise
      */
     public boolean add(Object obj) {
         if (this.menuItems[this.menuItems.length - 1] != null)
@@ -43,8 +52,9 @@ public class Order implements Customizable {
     };
 
     /**
-     * @param obj
-     * @return boolean
+     * Handles removing an item from the data structure.
+     * @param obj which is to be removed.
+     * @return boolean true if removed successfully, false otherwise.
      */
     public boolean remove(Object obj) {
         if (obj instanceof MenuItem) {
@@ -63,6 +73,9 @@ public class Order implements Customizable {
         return false;
     };
 
+    /**
+     * Helper method for growing the data structure.
+     */
     public void grow() {
         MenuItem[] temp = new MenuItem[this.menuItems.length + GROWSIZE];
         for (int i = 0; i < menuItemsCount; i++) {
@@ -72,21 +85,24 @@ public class Order implements Customizable {
     }
 
     /**
-     * @param orderNum
+     * Sets the order number of the order.
+     * @param orderNum which is the order number.
      */
     public void setOrderNum(int orderNum) {
         this.orderNum = orderNum;
     }
 
     /**
-     * @return int
+     * Helper method for getting the order number of the order.
+     * @return int which is the order number.
      */
     public int getOrderNum() {
         return orderNum;
     }
 
     /**
-     * @return double
+     * Calculates the subtotal of the order
+     * @return double which is the price of the order to 2 decimal places.
      */
     public double getSubtotal() {
         double subTotal = 0.0;
@@ -103,7 +119,8 @@ public class Order implements Customizable {
     }
 
     /**
-     * @return double
+     * Calculates the sales tax of the given order.
+     * @return double the sales tax.
      */
     public double getSalesTax() {
         double subTotal = getSubtotal();
@@ -112,7 +129,8 @@ public class Order implements Customizable {
     }
 
     /**
-     * @return double
+     * Gets the total cost of the order which is subtotal + salestax.
+     * @return double the total cost.
      */
     public double getTotal() {
         double subTotal = getSubtotal();
@@ -121,7 +139,8 @@ public class Order implements Customizable {
     }
 
     /**
-     * @return String
+     * Formatted string of the order separated by new lines.
+     * @return String which is the formatted string of the order
      */
     public String toString() {
         String output = "";

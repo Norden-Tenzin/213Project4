@@ -16,6 +16,10 @@ import javafx.collections.FXCollections;
 import static source.Main.currOrder;
 import static source.Main.allOrders;;
 
+/**
+ * Controller class for the current orders page. Handles UI logic.
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class CurrentOrders {
     ObservableList lst = FXCollections.observableArrayList();
 
@@ -35,7 +39,8 @@ public class CurrentOrders {
     private TextField totalValue;
 
     /**
-     * @param event
+     * Removes an item from the orderlist.
+     * @param event is triggered when the user clicks the Remove button.
      */
     @FXML
     void removeItem(ActionEvent event) {
@@ -72,7 +77,8 @@ public class CurrentOrders {
     }
     
     /** 
-     * @param event
+     * Handles submitting the order.
+     * @param event is triggered when the user clicks the submit order button.
      */
     @FXML
     void submitOrder(ActionEvent event) {
@@ -85,6 +91,9 @@ public class CurrentOrders {
         totalValue.setText("$"+String.valueOf(currOrder.getTotal()));
     }
 
+    /**
+     * Used to initialize default values and images.
+     */
     @FXML
     void initialize(){
         FileInputStream input;
@@ -103,6 +112,9 @@ public class CurrentOrders {
         totalValue.setText("$"+String.valueOf(currOrder.getTotal()));
     }
 
+    /**
+     * Helper method for loading data into the view.
+     */
     private void loadData() {
         orderList.getItems().clear();
         lst.removeAll(lst);

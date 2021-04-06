@@ -26,9 +26,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-
 import static source.Main.currOrder;
 
+/**
+ * Donut Controller class for the Donut.fxml. Handles UI logic.
+ * @Tenzin Norden, @Vedant Mehta
+ */
 public class DonutController {
     private String type;
     private int orderQuantity;
@@ -57,8 +60,9 @@ public class DonutController {
     @FXML
     private ImageView donutImg;
 
-    /**
-     * @param event
+     /**
+     * Handles when the add to cart button is pressed. 
+     * @param event when the add to cart button is pressed.
      */
     @FXML
     void addToCart(ActionEvent event) {
@@ -77,7 +81,8 @@ public class DonutController {
     }
 
     /**
-     * @param event
+     * Handles removing an item from the cart.
+     * @param event is triggered when the user clicks the Remove From Cart button.
      */
     @FXML
     void removeFromCart(ActionEvent event) {
@@ -118,7 +123,8 @@ public class DonutController {
     }
 
     /**
-     * @param event
+     * Handles decreasing the amount of donut in the order.
+     * @param event is triggered when the quantity is decreased.
      */
     @FXML
     void decreaseQuantity(ActionEvent event) {
@@ -133,7 +139,8 @@ public class DonutController {
     }
 
     /**
-     * @param event
+     * Handles increasing the quantity of donut.
+     * @param event is triggered when the user increases the quantity of donut.
      */
     @FXML
     void increaseQuantity(ActionEvent event) {
@@ -145,7 +152,8 @@ public class DonutController {
     }
 
     /**
-     * @param event
+     * Handles selecting a flavor of donut when the dropdown is pressed
+     * @param event is triggered when the user selects a drop down item.
      */
     @FXML
     void selectFlavor(ActionEvent event) {
@@ -157,7 +165,8 @@ public class DonutController {
     }
 
     /**
-     * @param event
+     * Handles selecting the type of donut and changing the flavor types accordingly.
+     * @param event is triggered when the user selects the type drop down.
      */
     @FXML
     void selectType(ActionEvent event) {
@@ -181,7 +190,8 @@ public class DonutController {
     }
 
     /**
-     * @param event
+     * Handles submitting the order and thus closing the scene.
+     * @param event is triggered when the user selects the Submit button.
      */
     @FXML
     void submitOrder(ActionEvent event) {
@@ -189,6 +199,9 @@ public class DonutController {
         stage.close();
     }
 
+    /**
+     * Used to initialize default values and images.
+     */
     @FXML
     void initialize() {
 
@@ -224,6 +237,9 @@ public class DonutController {
         subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
+    /**
+     * Helper method for loading data into the list view.
+     */
     private void loadData() {
         orderList.getItems().clear();
         lst.removeAll(lst);
