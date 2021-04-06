@@ -79,7 +79,7 @@ public class Donut extends MenuItem implements Customizable{
      */
     // tostring.
     public String toString(){
-        return String.valueOf(this.flavour + ((this.flavour.equals("")) ?  "" : "  ") + this.type + "  " + this.price);
+        return String.valueOf(this.flavour +","+ this.type + "," + this.price);
     }
 
     // public static void main(String[] args) {

@@ -85,10 +85,24 @@ public class DonutController {
      */
     @FXML
     void removeFromCart(ActionEvent event) {
-        if(Integer.valueOf(quantity.getText())<=0)
-            errorBox.setText("Quantity cannot be less than or equal to 0");
+        if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+            Object obj = orderList.getSelectionModel().getSelectedItem();
+            int orderListIndex = orderList.getSelectionModel().getSelectedIndex();
+            String [] donutString = obj.toString().split(",");
+    
+            Donut tmpDonut = new Donut(donutString[1],donutString[0]);
+            System.out.println(currOrder.toString());
+            currOrder.remove(tmpDonut);
+            System.out.println(currOrder.toString());
+    
+            orderList.getItems().remove(orderListIndex);
+        }
         else
             errorBox.setText("Removed from cart");
+        
+       
+
+
 
 
         // ObservableList
