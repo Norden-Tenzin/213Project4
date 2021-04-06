@@ -54,33 +54,30 @@ public class DonutController {
 
     @FXML
     private ImageView donutImg;
-    
-    
-    /** 
+
+    /**
      * @param event
      */
     @FXML
     void addToCart(ActionEvent event) {
-        if(Integer.valueOf(quantity.getText())<=0)
+        if (Integer.valueOf(quantity.getText()) <= 0)
             errorBox.setText("Quantity cannot be less than or equal to 0");
-        else{
+        else {
             errorBox.setText("Added to cart");
             System.out.println(orderQuantity);
             System.out.println(flavor);
             System.out.println(type);
-            for(int i = 0; i < orderQuantity; i++){
+            for (int i = 0; i < orderQuantity; i++) {
                 Donut temp = new Donut(type, flavor);
+                temp.itemPrice();
                 currOrder.add(temp);
             }
         }
         loadData();
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-
-
-
-    
-    /** 
+    /**
      * @param event
      */
     @FXML
@@ -98,33 +95,32 @@ public class DonutController {
             orderList.getItems().remove(orderListIndex);
         }
         else
-            errorBox.setText("Removed from cart");
+            errorBox.setText("Unable to remove from cart");
         
        
 
 
 
-
         // ObservableList
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-    
-    /** 
+    /**
      * @param event
      */
     @FXML
     void decreaseQuantity(ActionEvent event) {
-        if(Integer.valueOf(quantity.getText())<=1)
+        if (Integer.valueOf(quantity.getText()) <= 1)
             quantity.setText("1");
         else
             quantity.setText((Integer.valueOf(quantity.getText()) - 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
-        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-    
-    /** 
+    /**
      * @param event
      */
     @FXML
@@ -132,23 +128,23 @@ public class DonutController {
         quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
-        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-    
-    /** 
+    /**
      * @param event
      */
     @FXML
     void selectFlavor(ActionEvent event) {
         flavor = donutFlavorSelect.getValue().toString();
-        donut = new Donut(type,flavor);
+        donut = new Donut(type, flavor);
         double price = orderQuantity * donut.itemPrice();
-        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-    
-    /** 
+    /**
      * @param event
      */
     @FXML
@@ -167,13 +163,12 @@ public class DonutController {
             donutFlavorSelect.getSelectionModel().select(0);
         }
         type = donutTypeSelect.getSelectionModel().getSelectedItem().toString();
-        donut = new Donut(type,flavor);
+        donut = new Donut(type, flavor);
         double price = orderQuantity * donut.itemPrice();
-        errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
     }
 
-    
-    /** 
+    /**
      * @param event
      */
     @FXML
@@ -195,68 +190,44 @@ public class DonutController {
         }
 
         orderQuantity = Integer.valueOf(quantity.getText());
-        ObservableList<String> donutTypes = FXCollections.observableArrayList("Yeast Donut", "Cake Donut", "Donut Holes");
+        ObservableList<String> donutTypes = FXCollections.observableArrayList("Yeast Donut", "Cake Donut",
+                "Donut Holes");
         donutTypeSelect.setItems(donutTypes);
         ObservableList<String> yeastTypes = FXCollections.observableArrayList("Glazed", "Sugar", "Boston Creme");
         donutFlavorSelect.setItems(yeastTypes);
-        
+
         donutTypeSelect.getSelectionModel().select(0);
         donutFlavorSelect.getSelectionModel().select(0);
-        
+
         type = donutTypeSelect.getSelectionModel().getSelectedItem().toString();
         flavor = donutFlavorSelect.getSelectionModel().getSelectedItem().toString();
         orderQuantity = 1;
 
-        donut = new Donut(type,flavor);
+        donut = new Donut(type, flavor);
         // orders = new Order();
 
         loadData();
-        errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
+        errorBox.setText("Price: $" + orderQuantity * donut.itemPrice());
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-    private void loadData(){
+    private void loadData() {
         orderList.getItems().clear();
+        lst.removeAll(lst);
 
-        System.out.println(lst.removeAll(lst));
         String temp[] = currOrder.toString().split("\n");
         lst.addAll(temp);
+
         orderList.getItems().addAll(lst);
     }
 
-    
-    /** 
+    /**
      * @param e
      */
-    private void displaySelected(MouseEvent e){
+    private void displaySelected(MouseEvent e) {
         MenuItem item = orderList.getSelectionModel().getSelectedItem();
-        if(item != null){
+        if (item != null) {
             System.out.println(item.toString());
         }
     }
-
-    // static class XCell extends ListCell<String> {
-    //     HBox hbox = new HBox();
-    //     Label label = new Label("");
-    //     Pane pane = new Pane();
-    //     Button button = new Button("Del");
-
-    //     public XCell() {
-    //         super();
-    //         hbox.getChildren().addAll(label, pane, button);
-    //         HBox.setHgrow(pane, Priority.ALWAYS);
-    //         button.setOnAction(event -> getListView().getItems().remove(getItem()));
-    //     }
-
-    //     @Override
-    //     protected void updateItem(String item, boolean empty) {
-    //         super.updateItem(item, empty);
-    //         setText(null);
-    //         setGraphic(null);
-
-    //         if (item != null && !empty) {
-    //             label.setText(item);
-    //             setGraphic(hbox);
-    //         }
-    //     }
-    // }
 }
