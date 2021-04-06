@@ -2,6 +2,7 @@ package source;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javax.swing.event.MenuKeyEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ListCell;
@@ -21,12 +23,12 @@ import javafx.scene.layout.Priority;
 
 import static source.Main.currOrder;
 
-
 public class DonutController {
     private String type;
     private int orderQuantity;
     private String flavor;
     private Donut donut;
+    ObservableList lst = FXCollections.observableArrayList();
 
     @FXML
     private TextField quantity;
@@ -41,11 +43,10 @@ public class DonutController {
     private TextArea errorBox;
 
     @FXML
-    private ListView orderList;
+    private ListView<MenuItem> orderList;
 
     @FXML
     private TextArea subtotalValue;
-
     
     @FXML
     void addToCart(ActionEvent event) {
@@ -56,10 +57,12 @@ public class DonutController {
             System.out.println(orderQuantity);
             System.out.println(flavor);
             System.out.println(type);
-            for(int i=0;i<orderQuantity;i++){
-                currOrder.add(donut);
+            for(int i = 0; i < orderQuantity; i++){
+                Donut temp = new Donut(type, flavor);
+                currOrder.add(temp);
             }
         }
+        loadData();
     }
 
 
@@ -71,6 +74,9 @@ public class DonutController {
             errorBox.setText("Quantity cannot be less than or equal to 0");
         else
             errorBox.setText("Removed from cart");
+
+
+        // ObservableList
     }
 
     @FXML
@@ -86,7 +92,6 @@ public class DonutController {
 
     @FXML
     void increaseQuantity(ActionEvent event) {
-      
         quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
@@ -144,7 +149,25 @@ public class DonutController {
 
         donut = new Donut(type,flavor);
         // orders = new Order();
+
+        loadData();
         errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
+    }
+
+    private void loadData(){
+        orderList.getItems().clear();
+
+        System.out.println(lst.removeAll(lst));
+        String temp[] = currOrder.toString().split("\n");
+        lst.addAll(temp);
+        orderList.getItems().addAll(lst);
+    }
+
+    private void displaySelected(MouseEvent e){
+        MenuItem item = orderList.getSelectionModel().getSelectedItem();
+        if(item != null){
+            System.out.println(item.toString());
+        }
     }
 
     // static class XCell extends ListCell<String> {
