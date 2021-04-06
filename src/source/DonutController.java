@@ -70,16 +70,14 @@ public class DonutController {
             System.out.println(type);
             for(int i = 0; i < orderQuantity; i++){
                 Donut temp = new Donut(type, flavor);
+                temp.itemPrice();
                 currOrder.add(temp);
             }
         }
         loadData();
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
-
-
-
-    
     /** 
      * @param event
      */
@@ -92,6 +90,7 @@ public class DonutController {
 
 
         // ObservableList
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
     
@@ -107,6 +106,7 @@ public class DonutController {
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
     
@@ -119,6 +119,7 @@ public class DonutController {
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
     
@@ -131,6 +132,7 @@ public class DonutController {
         donut = new Donut(type,flavor);
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
     
@@ -198,18 +200,19 @@ public class DonutController {
 
         loadData();
         errorBox.setText("Price: $"+orderQuantity * donut.itemPrice());
+        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
     }
 
     private void loadData(){
         orderList.getItems().clear();
+        lst.removeAll(lst);
 
-        System.out.println(lst.removeAll(lst));
         String temp[] = currOrder.toString().split("\n");
         lst.addAll(temp);
+
         orderList.getItems().addAll(lst);
     }
 
-    
     /** 
      * @param e
      */
@@ -219,30 +222,4 @@ public class DonutController {
             System.out.println(item.toString());
         }
     }
-
-    // static class XCell extends ListCell<String> {
-    //     HBox hbox = new HBox();
-    //     Label label = new Label("");
-    //     Pane pane = new Pane();
-    //     Button button = new Button("Del");
-
-    //     public XCell() {
-    //         super();
-    //         hbox.getChildren().addAll(label, pane, button);
-    //         HBox.setHgrow(pane, Priority.ALWAYS);
-    //         button.setOnAction(event -> getListView().getItems().remove(getItem()));
-    //     }
-
-    //     @Override
-    //     protected void updateItem(String item, boolean empty) {
-    //         super.updateItem(item, empty);
-    //         setText(null);
-    //         setGraphic(null);
-
-    //         if (item != null && !empty) {
-    //             label.setText(item);
-    //             setGraphic(hbox);
-    //         }
-    //     }
-    // }
 }

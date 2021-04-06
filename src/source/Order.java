@@ -14,7 +14,6 @@ public class Order implements Customizable{
         this.menuItemsCount = 0;
     }
 
-    
     /** 
      * @param item
      * @return int
@@ -28,7 +27,6 @@ public class Order implements Customizable{
         return -1;
     };
 
-    
     /** 
      * @param obj
      * @return boolean
@@ -44,7 +42,6 @@ public class Order implements Customizable{
         return false;
     };
 
-    
     /** 
      * @param obj
      * @return boolean
@@ -74,7 +71,6 @@ public class Order implements Customizable{
         this.menuItems = temp;
     }
     
-    
     /** 
      * @param orderNum
      */
@@ -82,7 +78,6 @@ public class Order implements Customizable{
         this.orderNum = orderNum;
     }
 
-    
     /** 
      * @return int
      */
@@ -90,7 +85,6 @@ public class Order implements Customizable{
         return orderNum;
     }
 
-    
     /** 
      * @return double
      */

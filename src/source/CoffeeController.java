@@ -257,7 +257,6 @@ public class CoffeeController {
           errorBox.setText("Price: $" + cost);
     }
 
-    
     /** 
      * @param quantity
      * @param addOn
@@ -268,5 +267,4 @@ public class CoffeeController {
       }
       System.out.println(coffee.getPrice());
   }
-
 }
