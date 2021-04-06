@@ -16,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import static source.Main.currOrder;
 
 public class CoffeeController {
@@ -25,6 +27,7 @@ public class CoffeeController {
     private Coffee coffee;
     private int coffeeQuantity;
     private int coffeeAddOnQuantity;
+    ObservableList lst = FXCollections.observableArrayList();
 
     private double cost;
 
@@ -65,11 +68,12 @@ public class CoffeeController {
     void addToCart(ActionEvent event) {
         for (int i = 0; i < coffeeQuantity; i++) {
             currOrder.add(coffee);
-            orderList.getItems().add(coffee.toString());
+            // orderList.getItems().add(coffee.toString());
         }
+        loadData();
         resetOrder(event);
         coffeeAddOnQuantity = 0;
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -91,7 +95,7 @@ public class CoffeeController {
         addOnQuantity.setText("0");
         coffeeSelectAddOn.getSelectionModel().select(0);
         coffeeAddOnQuantity = 0;
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -109,7 +113,7 @@ public class CoffeeController {
             cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
             errorBox.setText("Price: $" + cost);
         }
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -124,7 +128,7 @@ public class CoffeeController {
         coffeeQuantity = Integer.valueOf(quantity.getText());
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -139,7 +143,7 @@ public class CoffeeController {
         if (!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None")) {
             cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
             errorBox.setText("Price: $" + cost);
-            subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+            subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
         }
 
     }
@@ -153,7 +157,7 @@ public class CoffeeController {
         coffeeQuantity = Integer.valueOf(quantity.getText());
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -161,7 +165,40 @@ public class CoffeeController {
      */
     @FXML
     void removeFromCart(ActionEvent event) {
+        MenuItem tmpItem;
+        if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+            Object obj = orderList.getSelectionModel().getSelectedItem();
+            
+            String [] donutString = obj.toString().split(",");
+            if(donutString.length==2){
+                tmpItem = new Coffee(donutString[1].split(" ")[0]);
+                if(donutString[1].split(" ").length>=2){
+                    String[]addons = donutString[1].split(" ")[1].split("\\+");
+                    for(String item : addons){
+                        if(!item.equals(""))
+                        ((Coffee)tmpItem).add(item);
+                    }
+                }
+            }
+            else{
+                tmpItem = new Donut(donutString[2],donutString[1]);
+            }
+            
+            tmpItem.itemPrice();
+            System.out.println(currOrder.toString());
+            //deleting from current order
+            currOrder.remove(tmpItem);
+            System.out.println(currOrder.toString());
+        }
+        else
+            errorBox.setText("Unable to remove from cart");
+        
+       
 
+
+        loadData();
+        // ObservableList
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -173,7 +210,7 @@ public class CoffeeController {
             cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
             errorBox.setText("Price: $" + cost);
         }
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -185,7 +222,7 @@ public class CoffeeController {
         coffee.setSize(size);
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -193,7 +230,8 @@ public class CoffeeController {
      */
     @FXML
     void submitOrder(ActionEvent event) {
-
+        Stage stage = (Stage)orderList.getScene().getWindow();
+        stage.close();
     }
 
     /**
@@ -213,7 +251,17 @@ public class CoffeeController {
         coffeeQuantity = 1;
         coffeeAddOnQuantity = 0;
         errorBox.setText("Price: $" + coffeeQuantity * coffee.itemPrice());
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+    }
+
+    private void loadData() {
+        orderList.getItems().clear();
+        lst.removeAll(lst);
+
+        String temp[] = currOrder.toString().split("\n");
+        lst.addAll(temp);
+
+        orderList.getItems().addAll(lst);
     }
 
     @FXML
@@ -253,6 +301,8 @@ public class CoffeeController {
         coffeeQuantity = 1;
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
+
+        loadData();
     }
 
     /**

@@ -100,10 +100,10 @@ public class Coffee extends MenuItem implements Customizable {
         String strAddIN = "";
         for (String str : addIn) {
             if (str != null) {
-                strAddIN += "+" + str + " ";
+                strAddIN += "+" + str;
             }
         }
-        return String.valueOf(this.price + ", " + this.size + " " + strAddIN);
+        return String.valueOf("$"+this.price + "," + this.size + " " + strAddIN);
     }
 
     public static void main(String[] args) {
@@ -112,4 +112,5 @@ public class Coffee extends MenuItem implements Customizable {
         cf.itemPrice();
         System.out.println(cf.toString());
     }
+    
 }

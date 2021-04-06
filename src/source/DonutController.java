@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.event.MenuKeyEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 import static source.Main.currOrder;
 
@@ -74,7 +76,7 @@ public class DonutController {
             }
         }
         loadData();
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -82,17 +84,30 @@ public class DonutController {
      */
     @FXML
     void removeFromCart(ActionEvent event) {
+        MenuItem tmpItem;
         if(orderList.getSelectionModel().getSelectedIndex()!=-1){
             Object obj = orderList.getSelectionModel().getSelectedItem();
-            int orderListIndex = orderList.getSelectionModel().getSelectedIndex();
+            
             String [] donutString = obj.toString().split(",");
-    
-            Donut tmpDonut = new Donut(donutString[1],donutString[0]);
+            if(donutString.length==2){
+                tmpItem = new Coffee(donutString[1].split(" ")[0]);
+                if(donutString[1].split(" ").length>=2){
+                    String[]addons = donutString[1].split(" ")[1].split("\\+");
+                    for(String item : addons){
+                        if(!item.equals(""))
+                        ((Coffee)tmpItem).add(item);
+                    }
+                }
+            }
+            else{
+                tmpItem = new Donut(donutString[2],donutString[1]);
+            }
+            
+            tmpItem.itemPrice();
             System.out.println(currOrder.toString());
-            currOrder.remove(tmpDonut);
+            //deleting from current order
+            currOrder.remove(tmpItem);
             System.out.println(currOrder.toString());
-    
-            orderList.getItems().remove(orderListIndex);
         }
         else
             errorBox.setText("Unable to remove from cart");
@@ -100,9 +115,9 @@ public class DonutController {
        
 
 
-
+        loadData();
         // ObservableList
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -117,7 +132,7 @@ public class DonutController {
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -129,7 +144,7 @@ public class DonutController {
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -141,7 +156,7 @@ public class DonutController {
         donut = new Donut(type, flavor);
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -173,7 +188,8 @@ public class DonutController {
      */
     @FXML
     void submitOrder(ActionEvent event) {
-
+        Stage stage = (Stage)orderList.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -208,7 +224,7 @@ public class DonutController {
 
         loadData();
         errorBox.setText("Price: $" + orderQuantity * donut.itemPrice());
-        subtotalValue.setText(String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
     }
 
     private void loadData() {
@@ -219,15 +235,5 @@ public class DonutController {
         lst.addAll(temp);
 
         orderList.getItems().addAll(lst);
-    }
-
-    /**
-     * @param e
-     */
-    private void displaySelected(MouseEvent e) {
-        MenuItem item = orderList.getSelectionModel().getSelectedItem();
-        if (item != null) {
-            System.out.println(item.toString());
-        }
     }
 }
