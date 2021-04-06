@@ -133,22 +133,5 @@ public class Order implements Customizable {
         return output;
     }
 
-    // public static void main(String[] args) {
-    // Order o = new Order();
-    // Coffee cf = new Coffee("Venti");
-    // cf.add("cream");
-    // o.add(cf);
 
-    // Donut d = new Donut("YeastDonut", "BLue");
-    // d.setFlavour("Blue");
-    // d.itemPrice();
-    // o.add(d);
-    // System.out.println(o.toString());
-
-    // o.remove(cf);
-    // System.out.println(o.toString());
-
-    // o.remove(d);
-    // System.out.println(o.toString());
-    // }
 }

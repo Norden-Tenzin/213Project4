@@ -82,11 +82,5 @@ public class Donut extends MenuItem implements Customizable{
         return String.valueOf("$"+this.price+"," + this.flavour +","+ this.type );
     }
 
-    // public static void main(String[] args) {
-    //     Donut cf = new Donut("YeastDonut", "BLue");
-    //     // cf.setFlavour("Blue");
-    //     cf.itemPrice();
-    //     System.out.println(cf.toString());
-    // }
 }
 

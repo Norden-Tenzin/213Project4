@@ -66,9 +66,6 @@ public class DonutController {
             errorBox.setText("Quantity cannot be less than or equal to 0");
         else {
             errorBox.setText("Added to cart");
-            System.out.println(orderQuantity);
-            System.out.println(flavor);
-            System.out.println(type);
             for (int i = 0; i < orderQuantity; i++) {
                 Donut temp = new Donut(type, flavor);
                 temp.itemPrice();
@@ -104,10 +101,10 @@ public class DonutController {
             }
             
             tmpItem.itemPrice();
-            System.out.println(currOrder.toString());
+
             //deleting from current order
             currOrder.remove(tmpItem);
-            System.out.println(currOrder.toString());
+
         }
         else
             errorBox.setText("Unable to remove from cart");

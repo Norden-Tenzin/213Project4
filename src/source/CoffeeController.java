@@ -185,10 +185,9 @@ public class CoffeeController {
             }
             
             tmpItem.itemPrice();
-            System.out.println(currOrder.toString());
+
             //deleting from current order
             currOrder.remove(tmpItem);
-            System.out.println(currOrder.toString());
         }
         else
             errorBox.setText("Unable to remove from cart");
@@ -313,6 +312,5 @@ public class CoffeeController {
         for (int i = 0; i < quantity; i++) {
             coffee.add(addOn);
         }
-        System.out.println(coffee.getPrice());
     }
 }

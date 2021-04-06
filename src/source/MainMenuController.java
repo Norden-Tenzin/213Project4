@@ -88,9 +88,20 @@ public class MainMenuController {
     
     /** 
      * @param event
+     * @throws IOException
      */
     // @FXML
-    public void OpenStoreOrder(ActionEvent event) {
+    public void OpenStoreOrder(ActionEvent event) throws IOException {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../StoreOrders.fxml"));
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.setTitle("Current Order");
+      stage.setResizable(false);
+      stage.setScene(new Scene(root1));
+
+      //After the window is open, make main menu disabled
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.showAndWait();
 
     }
 
