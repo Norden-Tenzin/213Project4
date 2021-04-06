@@ -7,17 +7,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
+import static source.Main.currOrder;
+import static source.Main.allOrders;
 
 /**
  * @Tenzin Norden, @Vedant Mehta
  */
 public class StoreOrdersController {
+    ObservableList lst = FXCollections.observableArrayList();
 
     @FXML
-    private ListView orderList;
+    private ListView<?> orderList;
 
     @FXML
-    private TextField totalAmount;
+    private TextField subtotalValue;
 
     @FXML
     private CheckBox deleteCheckbox;
@@ -26,30 +34,71 @@ public class StoreOrdersController {
     private CheckBox exportCheckbox;
 
     @FXML
-    private ListView orderDetailsList;
-   
-    @FXML
-    void showOrder(ActionEvent event) {
+    private TextField taxValue;
 
+    @FXML
+    private TextField totalValue;
+
+    @FXML
+    private TextArea orderDetailsList;
+
+    @FXML
+    void showOrder(MouseEvent event) {
+        if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+            Object obj = orderList.getSelectionModel().getSelectedItem();
+            String [] donutString = obj.toString().split(",");
+            String orderNum = donutString[0].split(" ")[1];
+            Order temp = allOrders.findAndReturnOrder(Integer.parseInt(orderNum));
+            if(temp != null){
+                orderDetailsList.setText(temp.toString());
+                subtotalValue.setText(String.valueOf(temp.getSubtotal()));
+                taxValue.setText(String.valueOf(temp.getSalesTax()));
+                totalValue.setText(String.valueOf(temp.getTotal()));
+            }
+        }
     }
 
     @FXML
     void selectDelete(ActionEvent event) {
-       exportCheckbox.setSelected(false);
-
+        exportCheckbox.setSelected(false);
     }
 
     @FXML
     void selectExport(ActionEvent event) {
-      deleteCheckbox.setSelected(false);
-
+        deleteCheckbox.setSelected(false);
     }
 
     @FXML
     void submitAction(ActionEvent event) {
-
+        if(deleteCheckbox.isSelected()){
+            if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+                Object obj = orderList.getSelectionModel().getSelectedItem();
+                String [] donutString = obj.toString().split(",");
+                String orderNum = donutString[0].split(" ")[1];
+                Order temp = allOrders.findAndReturnOrder(Integer.parseInt(orderNum));
+                allOrders.remove(temp);
+                
+                loadData();
+                orderDetailsList.setText("");
+                subtotalValue.setText(String.valueOf(0.0));
+                taxValue.setText(String.valueOf(0.0));
+                totalValue.setText(String.valueOf(0.0));
+            }
+        }
     }
 
-   
+    @FXML
+    void initialize(){
+        loadData();
+    }
 
+    private void loadData() {
+        orderList.getItems().clear();
+        lst.removeAll(lst);
+
+        String temp[] = allOrders.toString().split("\n");
+        lst.addAll(temp);
+
+        orderList.getItems().addAll(lst);
+    }
 }

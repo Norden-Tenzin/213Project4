@@ -204,7 +204,6 @@ public class DonutController {
      */
     @FXML
     void initialize() {
-
         FileInputStream input;
         try {
             input = new FileInputStream("assets/donut.png");

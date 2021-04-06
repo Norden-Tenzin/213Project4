@@ -16,11 +16,7 @@ import javafx.collections.FXCollections;
 import static source.Main.currOrder;
 import static source.Main.allOrders;;
 
-/**
- * Controller class for the current orders page. Handles UI logic.
- * @Tenzin Norden, @Vedant Mehta
- */
-public class CurrentOrders {
+public class CurrentOrderController {
     ObservableList lst = FXCollections.observableArrayList();
 
     @FXML
