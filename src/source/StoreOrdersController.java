@@ -1,5 +1,7 @@
 package source;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -69,7 +71,7 @@ public class StoreOrdersController {
     }
 
     @FXML
-    void submitAction(ActionEvent event) {
+    void submitAction(ActionEvent event) throws FileNotFoundException {
         if(deleteCheckbox.isSelected()){
             if(orderList.getSelectionModel().getSelectedIndex()!=-1){
                 Object obj = orderList.getSelectionModel().getSelectedItem();
@@ -83,6 +85,13 @@ public class StoreOrdersController {
                 subtotalValue.setText(String.valueOf(0.0));
                 taxValue.setText(String.valueOf(0.0));
                 totalValue.setText(String.valueOf(0.0));
+            }
+        }
+        if(exportCheckbox.isSelected()){
+            String filename="orders.txt";
+            String output = allOrders.getOrderString();
+            try (PrintWriter out = new PrintWriter(filename)) {
+                out.println(output);
             }
         }
     }
@@ -101,4 +110,5 @@ public class StoreOrdersController {
 
         orderList.getItems().addAll(lst);
     }
+
 }

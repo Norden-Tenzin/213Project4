@@ -1,0 +1,17 @@
+Order#1:
+$1.99,Short 
+$1.99,Short 
+$1.99,Short 
+$1.99,Short 
+$1.99,Short 
+
+Order#2:
+$1.39,Glazed,Yeast Donut
+$1.39,Glazed,Yeast Donut
+$1.39,Glazed,Yeast Donut
+$1.39,Glazed,Yeast Donut
+$1.59,Chocolate,Cake Donut
+$1.59,Chocolate,Cake Donut
+$1.59,Chocolate,Cake Donut
+
+
