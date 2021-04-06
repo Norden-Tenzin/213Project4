@@ -1,5 +1,7 @@
 package source;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -12,7 +14,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import static source.Main.currOrder;
 
 public class CoffeeController {
@@ -50,6 +53,16 @@ public class CoffeeController {
     private TextArea addOnList;
 
     @FXML
+    private ImageView coffeeImg;
+
+    @FXML
+    private ImageView milkImg;
+
+    
+    /** 
+     * @param event
+     */
+    @FXML
     void addToCart(ActionEvent event) {
       for(int i=0;i<coffeeQuantity;i++){ 
           currOrder.add(coffee);
@@ -59,6 +72,10 @@ public class CoffeeController {
       coffeeAddOnQuantity = 0;
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void addToOrder(ActionEvent event) {
       if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None") || !addOnQuantity.getText().equals("0")){
@@ -76,6 +93,10 @@ public class CoffeeController {
       coffeeAddOnQuantity = 0;
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void decreaseAddOnQuantity(ActionEvent event) {
       if(Integer.valueOf(addOnQuantity.getText())<=0)
@@ -90,6 +111,10 @@ public class CoffeeController {
         }
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void decreaseQuantity(ActionEvent event) {
       if(Integer.valueOf(quantity.getText())<=1)
@@ -101,6 +126,10 @@ public class CoffeeController {
           errorBox.setText("Price: $" + cost);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void increaseAddOnQuantity(ActionEvent event) {
       addOnQuantity.setText((Integer.valueOf(addOnQuantity.getText()) + 1) + "");
@@ -114,6 +143,10 @@ public class CoffeeController {
 
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void increaseQuantity(ActionEvent event) {
       quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
@@ -122,11 +155,19 @@ public class CoffeeController {
           errorBox.setText("Price: $" + cost);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void removeFromCart(ActionEvent event) {
       
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void selectAddOn(ActionEvent event) {
       if(!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None")){
@@ -135,6 +176,10 @@ public class CoffeeController {
       }
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void selectSize(ActionEvent event) {
       size = coffeeSizeSelect.getValue().toString();
@@ -143,11 +188,19 @@ public class CoffeeController {
           errorBox.setText("Price: $" + cost);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void submitOrder(ActionEvent event) {
 
     }
 
+   
+   /** 
+    * @param event
+    */
    @FXML
     void resetOrder(ActionEvent event) {
       addOnList.setText("");
@@ -168,6 +221,25 @@ public class CoffeeController {
 
     @FXML
     void initialize(){
+
+      FileInputStream coffeeInput;
+      FileInputStream milkInput;
+
+      try {
+          coffeeInput = new FileInputStream("assets/coffee.png");
+          milkInput = new FileInputStream("assets/milk.png");
+
+          Image coffeeImage = new Image(coffeeInput);
+          Image milkImage = new Image(milkInput);
+
+          coffeeImg.setImage(coffeeImage);
+          milkImg.setImage(milkImage);
+
+      } catch (FileNotFoundException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      }
+
       ObservableList<String> sizes = FXCollections.observableArrayList("Short","Tall", "Grande","Venti");
       coffeeSizeSelect.setItems(sizes);
 
@@ -185,6 +257,11 @@ public class CoffeeController {
           errorBox.setText("Price: $" + cost);
     }
 
+    
+    /** 
+     * @param quantity
+     * @param addOn
+     */
     public void addAddOn(int quantity, String addOn){
       for(int i=0;i<quantity;i++){
           coffee.add(addOn);

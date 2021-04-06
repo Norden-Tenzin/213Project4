@@ -66,7 +66,7 @@
                               <Button layoutX="85.0" layoutY="222.0" mnemonicParsing="false" onAction="#increaseQuantity" prefHeight="27.0" prefWidth="24.0" text="+" />
                               <Button layoutX="145.0" layoutY="222.0" mnemonicParsing="false" onAction="#decreaseQuantity" prefHeight="27.0" prefWidth="24.0" text="-" />
                               <TextField fx:id="quantity" editable="false" layoutX="81.0" layoutY="185.0" prefHeight="27.0" prefWidth="102.0" text="1" />
-                              <ImageView fitHeight="72.0" fitWidth="186.0" layoutX="94.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="coffeeImg" fitHeight="72.0" fitWidth="186.0" layoutX="94.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/coffee.png" />
                                  </image>
@@ -88,7 +88,7 @@
                               <Button layoutX="85.0" layoutY="222.0" mnemonicParsing="false" onAction="#increaseAddOnQuantity" prefHeight="27.0" prefWidth="24.0" text="+" />
                               <Button layoutX="145.0" layoutY="222.0" mnemonicParsing="false" onAction="#decreaseAddOnQuantity" prefHeight="27.0" prefWidth="24.0" text="-" />
                               <TextField fx:id="addOnQuantity" editable="false" layoutX="81.0" layoutY="185.0" prefHeight="27.0" prefWidth="102.0" text="0" />
-                              <ImageView fitHeight="72.0" fitWidth="186.0" layoutX="65.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="milkImg" fitHeight="72.0" fitWidth="186.0" layoutX="65.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/Milk.png" />
                                  </image>

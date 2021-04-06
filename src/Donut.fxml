@@ -67,7 +67,7 @@
                         <Button layoutX="274.0" layoutY="234.0" mnemonicParsing="false" onAction="#decreaseQuantity" prefHeight="27.0" prefWidth="24.0" text="-" />
                         <TextField fx:id="quantity" editable="false" layoutX="126.0" layoutY="233.0" prefHeight="27.0" prefWidth="102.0" text="1" />
                         <TextArea fx:id="errorBox" editable="false" layoutX="2.0" layoutY="355.0" prefHeight="43.0" prefWidth="364.0" wrapText="true" />
-                        <ImageView fitHeight="72.0" fitWidth="186.0" layoutX="141.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="donutImg" fitHeight="72.0" fitWidth="186.0" layoutX="141.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/donut.png" />
                            </image>

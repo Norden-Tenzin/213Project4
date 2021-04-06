@@ -1,5 +1,7 @@
 package source;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.event.MenuKeyEvent;
@@ -11,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ListView;
@@ -47,7 +51,14 @@ public class DonutController {
 
     @FXML
     private TextArea subtotalValue;
+
+    @FXML
+    private ImageView donutImg;
     
+    
+    /** 
+     * @param event
+     */
     @FXML
     void addToCart(ActionEvent event) {
         if(Integer.valueOf(quantity.getText())<=0)
@@ -68,6 +79,10 @@ public class DonutController {
 
 
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void removeFromCart(ActionEvent event) {
         if(Integer.valueOf(quantity.getText())<=0)
@@ -79,6 +94,10 @@ public class DonutController {
         // ObservableList
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void decreaseQuantity(ActionEvent event) {
         if(Integer.valueOf(quantity.getText())<=1)
@@ -90,6 +109,10 @@ public class DonutController {
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void increaseQuantity(ActionEvent event) {
         quantity.setText((Integer.valueOf(quantity.getText()) + 1) + "");
@@ -98,6 +121,10 @@ public class DonutController {
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void selectFlavor(ActionEvent event) {
         flavor = donutFlavorSelect.getValue().toString();
@@ -106,6 +133,10 @@ public class DonutController {
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void selectType(ActionEvent event) {
         if (donutTypeSelect.getValue().toString().equals("Yeast Donut")) {
@@ -127,6 +158,10 @@ public class DonutController {
         errorBox.setText("Price: $"+ Math.floor(price * 100) / 100);
     }
 
+    
+    /** 
+     * @param event
+     */
     @FXML
     void submitOrder(ActionEvent event) {
 
@@ -134,6 +169,17 @@ public class DonutController {
 
     @FXML
     void initialize() {
+
+        FileInputStream input;
+        try {
+            input = new FileInputStream("assets/donut.png");
+            Image img = new Image(input);
+            donutImg.setImage(img);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         orderQuantity = Integer.valueOf(quantity.getText());
         ObservableList<String> donutTypes = FXCollections.observableArrayList("Yeast Donut", "Cake Donut", "Donut Holes");
         donutTypeSelect.setItems(donutTypes);
@@ -163,6 +209,10 @@ public class DonutController {
         orderList.getItems().addAll(lst);
     }
 
+    
+    /** 
+     * @param e
+     */
     private void displaySelected(MouseEvent e){
         MenuItem item = orderList.getSelectionModel().getSelectedItem();
         if(item != null){

@@ -61,7 +61,7 @@
                         <Font size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="coffeeImg" fitHeight="150.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/coffee.png" />
                            </image>
@@ -72,7 +72,7 @@
                         <Font size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="132.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="donutImg" fitHeight="132.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/donut.png" />
                            </image>
@@ -83,7 +83,7 @@
                         <Font size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="165.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="storeImg" fitHeight="165.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/ruCafe.jpeg" />
                            </image>
@@ -94,7 +94,7 @@
                         <Font size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="126.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="orderImg" fitHeight="126.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/cart.png" />
                            </image>

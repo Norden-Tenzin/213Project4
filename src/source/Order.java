@@ -14,6 +14,11 @@ public class Order implements Customizable{
         this.menuItemsCount = 0;
     }
 
+    
+    /** 
+     * @param item
+     * @return int
+     */
     public int find(MenuItem item){
         for(int i = 0; i < menuItemsCount; i++){
             if(menuItems[i].toString().equals(item.toString())){
@@ -23,6 +28,11 @@ public class Order implements Customizable{
         return -1;
     };
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean add(Object obj){
         if (this.menuItems[this.menuItems.length - 1] != null)
            grow();
@@ -34,6 +44,11 @@ public class Order implements Customizable{
         return false;
     };
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean remove(Object obj){
         if(obj instanceof MenuItem){
             int indexItem = find((MenuItem)obj);
@@ -59,14 +74,26 @@ public class Order implements Customizable{
         this.menuItems = temp;
     }
     
+    
+    /** 
+     * @param orderNum
+     */
     public void setOrderNum(int orderNum){
         this.orderNum = orderNum;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getOrderNum(){
         return orderNum;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getSubtotal(){
         double subTotal = 0.0;
         for(MenuItem mi: menuItems){
@@ -81,18 +108,30 @@ public class Order implements Customizable{
         return subTotal;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getSalesTax(){
         double subTotal = getSubtotal();
         double percentage = 6.625;
         return Math.floor(((percentage/100.0)*subTotal) * 100) / 100;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getTotal(){
         double subTotal = getSubtotal();
         double tax = getSalesTax();
         return subTotal + tax;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String toString(){
         String output = "";
         for(MenuItem mi: menuItems){

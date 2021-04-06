@@ -12,6 +12,11 @@ public class StoreOrders implements Customizable{
         UniqueOrderNum = 1;
     }
 
+    
+    /** 
+     * @param item
+     * @return int
+     */
     public int find(Order item){
         for(int i = 0; i < ordersCount; i++){
             if(orders[i].getOrderNum() == item.getOrderNum()){
@@ -21,6 +26,11 @@ public class StoreOrders implements Customizable{
         return -1;
     };
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean add(Object obj){
         if (this.orders[this.orders.length - 1] != null)
            grow();
@@ -35,6 +45,11 @@ public class StoreOrders implements Customizable{
         return false;
     };
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean remove(Object obj){
         if(obj instanceof Order){
             int indexItem = find((Order)obj);

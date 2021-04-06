@@ -16,10 +16,19 @@ public class Coffee extends MenuItem implements Customizable{
         this.addInCount = 0;
     }
     
+    
+    /** 
+     * @param size
+     */
     public void setSize(String size){
         this.size = size;
     }
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean add(Object obj){
         if (this.addIn[this.addIn.length - 1] != null)
            grow();
@@ -32,6 +41,11 @@ public class Coffee extends MenuItem implements Customizable{
         return false;
     }
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     // isn't used
     public boolean remove(Object obj){
         return true;
@@ -47,6 +61,10 @@ public class Coffee extends MenuItem implements Customizable{
         this.addIn = temp;
      }
 
+    
+    /** 
+     * @return double
+     */
     public double itemPrice(){
         //size
         switch(this.size){
@@ -67,10 +85,18 @@ public class Coffee extends MenuItem implements Customizable{
         return this.price;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getPrice(){
         return this.price;
     }
 
+    
+    /** 
+     * @return String
+     */
     // tostring.
     public String toString(){
         String strAddIN = "";

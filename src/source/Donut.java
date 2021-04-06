@@ -13,22 +13,44 @@ public class Donut extends MenuItem implements Customizable{
         this.flavour = flavour;
     }
     
+    
+    /** 
+     * @param type
+     */
     public void setType(String type){
         this.type = type;
     }
 
+    
+    /** 
+     * @param flavour
+     */
     public void setFlavour(String flavour){
         this.flavour = flavour;
     }
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean add(Object obj){
         return false;
     }
 
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     public boolean remove(Object obj){
         return false;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double itemPrice(){
         //size
         switch(this.type){
@@ -43,10 +65,18 @@ public class Donut extends MenuItem implements Customizable{
         return this.price;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getPrice(){
         return this.price;
     }
 
+    
+    /** 
+     * @return String
+     */
     // tostring.
     public String toString(){
         return String.valueOf(this.flavour + ((this.flavour.equals("")) ?  "" : "  ") + this.type + "  " + this.price);
