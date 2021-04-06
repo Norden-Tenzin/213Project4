@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static Order currOrder = new Order();
     public static StoreOrders allOrders = new StoreOrders();
-
+    
     
     /** 
      * @param primaryStage
