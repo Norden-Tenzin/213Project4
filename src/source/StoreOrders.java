@@ -1,5 +1,7 @@
 package source;
 
+import jdk.nashorn.internal.ir.ReturnNode;
+
 public class StoreOrders implements Customizable{
     private int UniqueOrderNum;
     private Order orders[];
@@ -26,6 +28,18 @@ public class StoreOrders implements Customizable{
         return -1;
     };
 
+    /** 
+     * @param item
+     * @return int
+     */
+    public Order findAndReturnOrder(int orderNum){
+        for(int i = 0; i < ordersCount; i++){
+            if(orders[i].getOrderNum() == orderNum){
+                return orders[i];
+            }
+        }
+        return null;
+    };
     
     /** 
      * @param obj
@@ -73,5 +87,15 @@ public class StoreOrders implements Customizable{
             temp[i] = this.orders[i];
         }
         this.orders = temp;
+    }
+
+    public String toString(){
+        String output = "";
+        for (Order mi : orders) {
+            if (mi != null) {
+                output += "Order# " + mi.getOrderNum() + "\n";
+            }
+        }
+        return output;
     }
 }

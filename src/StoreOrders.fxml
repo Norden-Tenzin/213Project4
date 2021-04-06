@@ -37,9 +37,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="source.StoreOrdersController">
   <children>
@@ -49,17 +51,21 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="245.0">
                      <children>
-                        <ListView fx:id="orderList" layoutX="-2.0" onEditStart="#showOrder" prefHeight="258.0" prefWidth="306.0" />
-                        <TextField fx:id="totalAmount" layoutX="131.0" layoutY="269.0" />
-                        <Label layoutX="8.0" layoutY="274.0" text="Total Orders amount:" />
-                        <CheckBox fx:id="deleteCheckbox" layoutX="8.0" layoutY="317.0" mnemonicParsing="false" onAction="#selectDelete" text="Delete Order" />
-                        <CheckBox fx:id="exportCheckbox" layoutX="118.0" layoutY="317.0" mnemonicParsing="false" onAction="#selectExport" text="Export to .TXT" />
-                        <Button layoutX="14.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitAction" prefHeight="27.0" prefWidth="281.0" text="Submit" />
+                        <ListView fx:id="orderList" layoutX="3.0" layoutY="2.0" onMouseClicked="#showOrder" prefHeight="256.0" prefWidth="301.0" />
+                        <TextField fx:id="subtotalValue" editable="false" layoutX="154.0" layoutY="262.0" />
+                        <Label layoutX="119.0" layoutY="326.0" text="Total" />
+                        <CheckBox fx:id="deleteCheckbox" layoutX="9.0" layoutY="339.0" mnemonicParsing="false" onAction="#selectDelete" prefHeight="17.0" prefWidth="95.0" text="Delete Order" />
+                        <CheckBox fx:id="exportCheckbox" layoutX="9.0" layoutY="362.0" mnemonicParsing="false" onAction="#selectExport" prefHeight="17.0" prefWidth="108.0" text="Export to .TXT" />
+                        <Button layoutX="154.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitAction" prefHeight="27.0" prefWidth="149.0" text="Submit" />
+                        <TextField fx:id="taxValue" editable="false" layoutX="154.0" layoutY="291.0" />
+                        <TextField fx:id="totalValue" editable="false" layoutX="154.0" layoutY="322.0" />
+                        <Text layoutX="101.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal" />
+                        <Text layoutX="99.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales Tax" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <ListView fx:id="orderDetailsList" layoutX="-1.0" layoutY="2.0" prefHeight="398.0" prefWidth="324.0" />
+                        <TextArea fx:id="orderDetailsList" editable="false" prefHeight="398.0" prefWidth="325.0" />
                      </children>
                   </AnchorPane>
               </items>

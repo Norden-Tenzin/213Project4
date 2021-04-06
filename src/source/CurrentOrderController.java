@@ -16,7 +16,7 @@ import javafx.collections.FXCollections;
 import static source.Main.currOrder;
 import static source.Main.allOrders;;
 
-public class CurrentOrders {
+public class CurrentOrderController {
     ObservableList lst = FXCollections.observableArrayList();
 
     @FXML
