@@ -157,11 +157,13 @@ public class DonutController {
      */
     @FXML
     void selectFlavor(ActionEvent event) {
-        flavor = donutFlavorSelect.getValue().toString();
-        donut = new Donut(type, flavor);
-        double price = orderQuantity * donut.itemPrice();
-        errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        if(donutFlavorSelect.getValue()!=null){
+            flavor = donutFlavorSelect.getValue().toString();
+            donut = new Donut(type, flavor);
+            double price = orderQuantity * donut.itemPrice();
+            errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
+            subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        }
     }
 
     /**
