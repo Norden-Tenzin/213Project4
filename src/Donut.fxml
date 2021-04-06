@@ -78,7 +78,7 @@
                      <children>
                         <TextArea fx:id="subtotalValue" editable="false" layoutX="98.0" layoutY="306.0" prefHeight="17.0" prefWidth="128.0" />
                         <Label layoutX="33.0" layoutY="319.0" prefHeight="17.0" prefWidth="60.0" text="Subtotal:" />
-                        <Button layoutX="33.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitOrder" prefHeight="27.0" prefWidth="200.0" text="Submit Order" />
+                        <Button layoutX="33.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitOrder" prefHeight="27.0" prefWidth="200.0" text="Submit" />
                         <ListView fx:id="orderList" layoutX="4.0" layoutY="3.0" prefHeight="296.0" prefWidth="260.0" />
                      </children>
                   </AnchorPane>
