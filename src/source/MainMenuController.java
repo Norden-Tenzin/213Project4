@@ -16,7 +16,7 @@ public class MainMenuController {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Coffee.fxml"));
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
-      stage.setTitle("Order Donuts");
+      stage.setTitle("Order Coffee");
       stage.setResizable(false);
       stage.setScene(new Scene(root1));
 
@@ -38,4 +38,25 @@ public class MainMenuController {
       stage.initModality(Modality.APPLICATION_MODAL);
       stage.showAndWait();
     }
+    
+    // @FXML
+    public void OpenCurrentOrders(ActionEvent event) throws IOException {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../CurrentOrders.fxml"));
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.setTitle("Current Order");
+      stage.setResizable(false);
+      stage.setScene(new Scene(root1));
+
+      //After the window is open, make main menu disabled
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.showAndWait();
+    }
+
+    // @FXML
+    public void OpenStoreOrder(ActionEvent event) {
+
+    }
+
+
 }

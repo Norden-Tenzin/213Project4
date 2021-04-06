@@ -56,8 +56,14 @@ public class DonutController {
             System.out.println(orderQuantity);
             System.out.println(flavor);
             System.out.println(type);
+            for(int i=0;i<orderQuantity;i++){
+                currOrder.add(donut);
+            }
         }
     }
+
+
+
 
     @FXML
     void removeFromCart(ActionEvent event) {

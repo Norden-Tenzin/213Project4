@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+
+import static source.Main.currOrder;
 
 public class CoffeeController {
 
@@ -35,7 +38,7 @@ public class CoffeeController {
     private TextField addOnQuantity;
 
     @FXML
-    private TextArea orderList;
+    private ListView orderList;
 
     @FXML
     private TextArea subtotalValue;
@@ -48,9 +51,12 @@ public class CoffeeController {
 
     @FXML
     void addToCart(ActionEvent event) {
+      for(int i=0;i<coffeeQuantity;i++){ 
+          currOrder.add(coffee);
+          orderList.getItems().add(coffee.toString());
+      }
       resetOrder(event);
       coffeeAddOnQuantity = 0;
-
     }
 
     @FXML
@@ -59,12 +65,14 @@ public class CoffeeController {
          addOnString += addOnQuantity.getText() + "-"+coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString()+", ";
          addOnList.setText(addOnString);
       }
-      addOnQuantity.setText("0");
-      coffeeSelectAddOn.getSelectionModel().select(0);
+      
 
       addAddOn(coffeeAddOnQuantity, coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString());
       cost = Math.floor((coffeeQuantity*coffee.itemPrice())*100)/100;
       errorBox.setText("Price: $" + cost);
+      
+      addOnQuantity.setText("0");
+      coffeeSelectAddOn.getSelectionModel().select(0);
       coffeeAddOnQuantity = 0;
     }
 
