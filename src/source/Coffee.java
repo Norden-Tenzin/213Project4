@@ -49,6 +49,7 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
+     * Handles remove. Not applicable for Coffee. 
      * @param obj that is removed
      * @return boolean always returns true since it is not applicable in Coffee.
      */
