@@ -1,33 +1,35 @@
 package source;
 
 /**
- * Class for creating the store orders object. Handles deleting, adding and pricing orders.
+ * Class for creating the store orders object. Handles deleting, adding and
+ * pricing orders.
+ * 
  * @Tenzin Norden, @Vedant Mehta
  */
 
-public class StoreOrders implements Customizable{
+public class StoreOrders implements Customizable {
     private int UniqueOrderNum;
     private Order orders[];
     private int ordersCount;
     private int GROWSIZE = 5;
-    
+
     /**
-     * Store order constructor which sets default values for orders,ordercount and uniqueordernumber.
+     * Store order constructor which sets default values for orders,ordercount and
+     * uniqueordernumber.
      */
-    public StoreOrders(){
+    public StoreOrders() {
         orders = new Order[GROWSIZE];
         ordersCount = 0;
         UniqueOrderNum = 1;
     }
 
-    
-    /** 
+    /**
      * @param item
      * @return int
      */
-    public int find(Order item){
-        for(int i = 0; i < ordersCount; i++){
-            if(orders[i].getOrderNum() == item.getOrderNum()){
+    public int find(Order item) {
+        for (int i = 0; i < ordersCount; i++) {
+            if (orders[i].getOrderNum() == item.getOrderNum()) {
                 return i;
             }
         }
@@ -36,46 +38,48 @@ public class StoreOrders implements Customizable{
 
     /**
      * Handles finding an order by order number
+     * 
      * @param orderNum which is the unique order number.
      * @return the order which was found.
      */
-    public Order findAndReturnOrder(int orderNum){
-        for(int i = 0; i < ordersCount; i++){
-            if(orders[i].getOrderNum() == orderNum){
+    public Order findAndReturnOrder(int orderNum) {
+        for (int i = 0; i < ordersCount; i++) {
+            if (orders[i].getOrderNum() == orderNum) {
                 return orders[i];
             }
         }
         return null;
     };
-    
-    /** 
+
+    /**
      * Handles adding an order to the data structure.
+     * 
      * @param obj which is an order to be added.
      * @return boolean true if added, false otherwise.
      */
-    public boolean add(Object obj){
+    public boolean add(Object obj) {
         if (this.orders[this.orders.length - 1] != null)
-           grow();
-        if(obj instanceof Order){
-            Order temp = ((Order)obj);
+            grow();
+        if (obj instanceof Order) {
+            Order temp = ((Order) obj);
             temp.setOrderNum(UniqueOrderNum);
             orders[ordersCount] = temp;
-            ordersCount ++;
-            UniqueOrderNum ++;
+            ordersCount++;
+            UniqueOrderNum++;
             return true;
         }
         return false;
     };
 
-    
-    /** 
+    /**
      * Handles removing an order from the database.
+     * 
      * @param obj which is the order to be removed.
      * @return boolean true if removed, false otherwise.
      */
-    public boolean remove(Object obj){
-        if(obj instanceof Order){
-            int indexItem = find((Order)obj);
+    public boolean remove(Object obj) {
+        if (obj instanceof Order) {
+            int indexItem = find((Order) obj);
             if (indexItem == -1) {
                 return false;
             }
@@ -93,7 +97,7 @@ public class StoreOrders implements Customizable{
     /**
      * Helper method for growing the data structure
      */
-    public void grow(){
+    public void grow() {
         Order[] temp = new Order[this.orders.length + GROWSIZE];
         for (int i = 0; i < ordersCount; i++) {
             temp[i] = this.orders[i];
@@ -104,7 +108,7 @@ public class StoreOrders implements Customizable{
     /**
      * @return the formatted string of the store order.
      */
-    public String toString(){
+    public String toString() {
         String output = "";
         for (Order mi : orders) {
             if (mi != null) {
@@ -116,16 +120,16 @@ public class StoreOrders implements Customizable{
 
     /**
      * Helper method for getting the number of orders in the data structure.
+     * 
      * @return int the number of orders in the list.
      */
-    public String getOrderString(){
+    public String getOrderString() {
         String output = "";
-        for(Order mi:orders){
-            if(mi!=null){
-                output += "Order#" +mi.getOrderNum()+":\n"+ mi.toString() + "\n";
+        for (Order mi : orders) {
+            if (mi != null) {
+                output += "Order#" + mi.getOrderNum() + ":\n" + mi.toString() + "\n";
             }
         }
-        System.out.println(output);
         return output;
     }
 }

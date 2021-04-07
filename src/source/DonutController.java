@@ -30,6 +30,7 @@ import static source.Main.currOrder;
 
 /**
  * Donut Controller class for the Donut.fxml. Handles UI logic.
+ * 
  * @Tenzin Norden, @Vedant Mehta
  */
 public class DonutController {
@@ -60,8 +61,9 @@ public class DonutController {
     @FXML
     private ImageView donutImg;
 
-     /**
-     * Handles when the add to cart button is pressed. 
+    /**
+     * Handles when the add to cart button is pressed.
+     * 
      * @param event when the add to cart button is pressed.
      */
     @FXML
@@ -77,53 +79,50 @@ public class DonutController {
             }
         }
         loadData();
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles removing an item from the cart.
+     * 
      * @param event is triggered when the user clicks the Remove From Cart button.
      */
     @FXML
     void removeFromCart(ActionEvent event) {
         MenuItem tmpItem;
-        if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+        if (orderList.getSelectionModel().getSelectedIndex() != -1) {
             Object obj = orderList.getSelectionModel().getSelectedItem();
-            
-            String [] donutString = obj.toString().split(",");
-            if(donutString.length==2){
+
+            String[] donutString = obj.toString().split(",");
+            if (donutString.length == 2) {
                 tmpItem = new Coffee(donutString[1].split(" ")[0]);
-                if(donutString[1].split(" ").length>=2){
-                    String[]addons = donutString[1].split(" ")[1].split("\\+");
-                    for(String item : addons){
-                        if(!item.equals(""))
-                        ((Coffee)tmpItem).add(item);
+                if (donutString[1].split(" ").length >= 2) {
+                    String[] addons = donutString[1].split(" ")[1].split("\\+");
+                    for (String item : addons) {
+                        if (!item.equals(""))
+                            ((Coffee) tmpItem).add(item);
                     }
                 }
+            } else {
+                tmpItem = new Donut(donutString[2], donutString[1]);
             }
-            else{
-                tmpItem = new Donut(donutString[2],donutString[1]);
-            }
-            
+
             tmpItem.itemPrice();
 
-            //deleting from current order
+            // deleting from current order
             currOrder.remove(tmpItem);
 
-        }
-        else
+        } else
             errorBox.setText("Unable to remove from cart");
-        
-       
-
 
         loadData();
         // ObservableList
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles decreasing the amount of donut in the order.
+     * 
      * @param event is triggered when the quantity is decreased.
      */
     @FXML
@@ -135,11 +134,12 @@ public class DonutController {
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles increasing the quantity of donut.
+     * 
      * @param event is triggered when the user increases the quantity of donut.
      */
     @FXML
@@ -148,26 +148,29 @@ public class DonutController {
         orderQuantity = Integer.valueOf(quantity.getText());
         double price = orderQuantity * donut.itemPrice();
         errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles selecting a flavor of donut when the dropdown is pressed
+     * 
      * @param event is triggered when the user selects a drop down item.
      */
     @FXML
     void selectFlavor(ActionEvent event) {
-        if(donutFlavorSelect.getValue()!=null){
+        if (donutFlavorSelect.getValue() != null) {
             flavor = donutFlavorSelect.getValue().toString();
             donut = new Donut(type, flavor);
             double price = orderQuantity * donut.itemPrice();
             errorBox.setText("Price: $" + Math.floor(price * 100) / 100);
-            subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+            subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
         }
     }
 
     /**
-     * Handles selecting the type of donut and changing the flavor types accordingly.
+     * Handles selecting the type of donut and changing the flavor types
+     * accordingly.
+     * 
      * @param event is triggered when the user selects the type drop down.
      */
     @FXML
@@ -193,11 +196,12 @@ public class DonutController {
 
     /**
      * Handles submitting the order and thus closing the scene.
+     * 
      * @param event is triggered when the user selects the Submit button.
      */
     @FXML
     void submitOrder(ActionEvent event) {
-        Stage stage = (Stage)orderList.getScene().getWindow();
+        Stage stage = (Stage) orderList.getScene().getWindow();
         stage.close();
     }
 
@@ -235,7 +239,7 @@ public class DonutController {
 
         loadData();
         errorBox.setText("Price: $" + orderQuantity * donut.itemPrice());
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**

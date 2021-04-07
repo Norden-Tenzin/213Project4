@@ -48,6 +48,7 @@ public class StoreOrdersController {
 
     /**
      * Handles the showing of an order when clicking on the listView of orders.
+     * 
      * @param event
      */
     @FXML
@@ -66,30 +67,36 @@ public class StoreOrdersController {
         }
     }
 
-    /** 
-    * Handles the checkbox selectDelete such that when true it sets the value of selectExport to False
-    * @param event
-    */
+    /**
+     * Handles the checkbox selectDelete such that when true it sets the value of
+     * selectExport to False
+     * 
+     * @param event
+     */
     @FXML
     void selectDelete(ActionEvent event) {
         exportCheckbox.setSelected(false);
     }
 
-    /** 
-    * Handles the checkbox selectExport such that when true it sets the value of selectDelete to False
-    * @param event
-    */
+    /**
+     * Handles the checkbox selectExport such that when true it sets the value of
+     * selectDelete to False
+     * 
+     * @param event
+     */
     @FXML
     void selectExport(ActionEvent event) {
         deleteCheckbox.setSelected(false);
     }
 
-    /** 
-    * Handles the event for the submit button. if deleteCheckbox is true its deletes the selected order. 
-    * Otherwise if exportCheckbox is true then exports the orders as a text file.
-    * @param event
-    * @throws FileNotFoundException
-    */
+    /**
+     * Handles the event for the submit button. if deleteCheckbox is true its
+     * deletes the selected order. Otherwise if exportCheckbox is true then exports
+     * the orders as a text file.
+     * 
+     * @param event
+     * @throws FileNotFoundException
+     */
     @FXML
     void submitAction(ActionEvent event) throws FileNotFoundException {
         if (deleteCheckbox.isSelected()) {
@@ -116,18 +123,17 @@ public class StoreOrdersController {
         }
     }
 
-    /** 
-    * Initializes default values.
-    */
+    /**
+     * Initializes default values.
+     */
     @FXML
     void initialize() {
         loadData();
     }
 
-    
-    /** 
-    * loadDate Handles inputting the data from StoreOrders to the ListView.
-    */
+    /**
+     * loadDate Handles inputting the data from StoreOrders to the ListView.
+     */
     private void loadData() {
         orderList.getItems().clear();
         lst.removeAll(lst);

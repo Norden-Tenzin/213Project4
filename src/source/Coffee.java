@@ -1,8 +1,11 @@
 package source;
 
 import java.lang.Math;
+
 /**
- * Class used to create a Coffee object. Handles adding add-ons, defining size, and pricing
+ * Class used to create a Coffee object. Handles adding add-ons, defining size,
+ * and pricing
+ * 
  * @Tenzin Norden, @Vedant Mehta
  */
 public class Coffee extends MenuItem implements Customizable {
@@ -13,7 +16,9 @@ public class Coffee extends MenuItem implements Customizable {
     private int GROWSIZE = 5;
 
     /**
-     * Coffee constructor which takes in size and creates default values for addin, price and addin count.
+     * Coffee constructor which takes in size and creates default values for addin,
+     * price and addin count.
+     * 
      * @param size of the coffee
      */
     public Coffee(String size) {
@@ -25,6 +30,7 @@ public class Coffee extends MenuItem implements Customizable {
 
     /**
      * sets the coffee size.
+     * 
      * @param size of the coffee
      */
     public void setSize(String size) {
@@ -33,6 +39,7 @@ public class Coffee extends MenuItem implements Customizable {
 
     /**
      * Adds add-ons to the coffee.
+     * 
      * @param obj that is to be added
      * @return boolean true if added correctly, false otherwise.
      */
@@ -49,7 +56,8 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
-     * Handles remove. Not applicable for Coffee. 
+     * Handles remove. Not applicable for Coffee.
+     * 
      * @param obj that is removed
      * @return boolean always returns true since it is not applicable in Coffee.
      */
@@ -70,7 +78,9 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
-     * Handles pricing of the item by taking base cost and adding 20 cents for each additional add-on.
+     * Handles pricing of the item by taking base cost and adding 20 cents for each
+     * additional add-on.
+     * 
      * @return double which represents the price of the item
      */
     public double itemPrice() {
@@ -99,6 +109,7 @@ public class Coffee extends MenuItem implements Customizable {
 
     /**
      * Returns the price of the item
+     * 
      * @return double which is the price
      */
     public double getPrice() {
@@ -107,6 +118,7 @@ public class Coffee extends MenuItem implements Customizable {
 
     /**
      * Returns the formatted String
+     * 
      * @return String which outputs the item as well as the add-ons
      */
     public String toString() {
@@ -116,7 +128,7 @@ public class Coffee extends MenuItem implements Customizable {
                 strAddIN += "+" + str;
             }
         }
-        return String.valueOf("$"+this.price + "," + this.size + " " + strAddIN);
+        return String.valueOf("$" + this.price + "," + this.size + " " + strAddIN);
     }
-    
+
 }

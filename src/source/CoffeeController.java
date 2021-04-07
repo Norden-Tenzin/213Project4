@@ -21,6 +21,7 @@ import static source.Main.currOrder;
 
 /**
  * Controller for the Coffee.fxml file. Handles UI logic.
+ * 
  * @Tenzin Norden, @Vedant Mehta
  */
 public class CoffeeController {
@@ -65,7 +66,8 @@ public class CoffeeController {
     private ImageView milkImg;
 
     /**
-     * Handles when the add to cart button is pressed. 
+     * Handles when the add to cart button is pressed.
+     * 
      * @param event when the add to cart button is pressed.
      */
     @FXML
@@ -76,11 +78,13 @@ public class CoffeeController {
         loadData();
         resetOrder(event);
         coffeeAddOnQuantity = 0;
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
-     * Handles the add-to order event which is when the user adds add-ons to the coffee.
+     * Handles the add-to order event which is when the user adds add-ons to the
+     * coffee.
+     * 
      * @param event when the user presses the add to order button.
      */
     @FXML
@@ -99,11 +103,12 @@ public class CoffeeController {
         addOnQuantity.setText("0");
         coffeeSelectAddOn.getSelectionModel().select(0);
         coffeeAddOnQuantity = 0;
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles decreasing the quantity of the add-on.
+     * 
      * @param event when the decrease button is pressed.
      */
     @FXML
@@ -118,11 +123,12 @@ public class CoffeeController {
             cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
             errorBox.setText("Price: $" + cost);
         }
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles decreasing the amount of coffee in the order.
+     * 
      * @param event is triggered when the quantity is decreased.
      */
     @FXML
@@ -134,7 +140,7 @@ public class CoffeeController {
         coffeeQuantity = Integer.valueOf(quantity.getText());
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -149,13 +155,14 @@ public class CoffeeController {
         if (!coffeeSelectAddOn.getSelectionModel().getSelectedItem().toString().equals("None")) {
             cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
             errorBox.setText("Price: $" + cost);
-            subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+            subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
         }
 
     }
 
     /**
      * Handles increasing the quantity of coffee.
+     * 
      * @param event is triggered when the user increases the quantity of coffee.
      */
     @FXML
@@ -164,49 +171,50 @@ public class CoffeeController {
         coffeeQuantity = Integer.valueOf(quantity.getText());
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles removing an item from the cart.
+     * 
      * @param event is triggered when the user clicks the Remove From Cart button.
      */
     @FXML
     void removeFromCart(ActionEvent event) {
         MenuItem tmpItem;
-        if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+        if (orderList.getSelectionModel().getSelectedIndex() != -1) {
             Object obj = orderList.getSelectionModel().getSelectedItem();
-            
-            String [] donutString = obj.toString().split(",");
-            if(donutString.length==2){
+
+            String[] donutString = obj.toString().split(",");
+            if (donutString.length == 2) {
                 tmpItem = new Coffee(donutString[1].split(" ")[0]);
-                if(donutString[1].split(" ").length>=2){
-                    String[]addons = donutString[1].split(" ")[1].split("\\+");
-                    for(String item : addons){
-                        if(!item.equals(""))
-                        ((Coffee)tmpItem).add(item);
+                if (donutString[1].split(" ").length >= 2) {
+                    String[] addons = donutString[1].split(" ")[1].split("\\+");
+                    for (String item : addons) {
+                        if (!item.equals(""))
+                            ((Coffee) tmpItem).add(item);
                     }
                 }
+            } else {
+                tmpItem = new Donut(donutString[2], donutString[1]);
             }
-            else{
-                tmpItem = new Donut(donutString[2],donutString[1]);
-            }
-            
+
             tmpItem.itemPrice();
 
-            //deleting from current order
+            // deleting from current order
             currOrder.remove(tmpItem);
-        }
-        else
+        } else
             errorBox.setText("Unable to remove from cart");
 
         loadData();
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles selecting the add-on from the drop-down menu
-     * @param event is triggered when the user clicks the dropdown menu and selects a choice.
+     * 
+     * @param event is triggered when the user clicks the dropdown menu and selects
+     *              a choice.
      */
     @FXML
     void selectAddOn(ActionEvent event) {
@@ -214,12 +222,14 @@ public class CoffeeController {
             cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
             errorBox.setText("Price: $" + cost);
         }
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles selecting the size of the coffee from the drop-down menu.
-     * @param event is triggered when the user clicks the dropdown menu and selects a size.
+     * 
+     * @param event is triggered when the user clicks the dropdown menu and selects
+     *              a size.
      */
     @FXML
     void selectSize(ActionEvent event) {
@@ -227,21 +237,23 @@ public class CoffeeController {
         coffee.setSize(size);
         cost = Math.floor((coffeeQuantity * coffee.itemPrice() + coffeeAddOnQuantity * .2) * 100) / 100;
         errorBox.setText("Price: $" + cost);
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
      * Handles submitting the order, thus closing the current scene.
+     * 
      * @param event is triggered when the user clicks the Submit button.
      */
     @FXML
     void submitOrder(ActionEvent event) {
-        Stage stage = (Stage)orderList.getScene().getWindow();
+        Stage stage = (Stage) orderList.getScene().getWindow();
         stage.close();
     }
 
     /**
      * Handles resetting all the values in the order page.
+     * 
      * @param event is triggered when the user clicks the Reset Order button.
      */
     @FXML
@@ -258,7 +270,7 @@ public class CoffeeController {
         coffeeQuantity = 1;
         coffeeAddOnQuantity = 0;
         errorBox.setText("Price: $" + coffeeQuantity * coffee.itemPrice());
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
     }
 
     /**
@@ -320,8 +332,9 @@ public class CoffeeController {
 
     /**
      * Helper method for adding add-ons to a coffee
+     * 
      * @param quantity is the quantity of add-ons
-     * @param addOn is the name of the add-on
+     * @param addOn    is the name of the add-on
      */
     public void addAddOn(int quantity, String addOn) {
         for (int i = 0; i < quantity; i++) {

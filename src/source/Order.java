@@ -4,7 +4,9 @@ import javafx.scene.control.Menu;
 import java.lang.Math;
 
 /**
- * Class for creating an order object. Implements customizable and helps price and organize orders.
+ * Class for creating an order object. Implements customizable and helps price
+ * and organize orders.
+ * 
  * @Tenzin Norden, @Vedant Mehta
  */
 public class Order implements Customizable {
@@ -23,6 +25,7 @@ public class Order implements Customizable {
 
     /**
      * Finds any given order in the data structure.
+     * 
      * @param item which is the menu item
      * @return int which is the index of the menu item, -1 if not found.
      */
@@ -37,6 +40,7 @@ public class Order implements Customizable {
 
     /**
      * Adds menu items to the data structure
+     * 
      * @param obj which is to be added
      * @return boolean true if added successfully, false otherwise
      */
@@ -53,6 +57,7 @@ public class Order implements Customizable {
 
     /**
      * Handles removing an item from the data structure.
+     * 
      * @param obj which is to be removed.
      * @return boolean true if removed successfully, false otherwise.
      */
@@ -86,6 +91,7 @@ public class Order implements Customizable {
 
     /**
      * Sets the order number of the order.
+     * 
      * @param orderNum which is the order number.
      */
     public void setOrderNum(int orderNum) {
@@ -94,6 +100,7 @@ public class Order implements Customizable {
 
     /**
      * Helper method for getting the order number of the order.
+     * 
      * @return int which is the order number.
      */
     public int getOrderNum() {
@@ -102,6 +109,7 @@ public class Order implements Customizable {
 
     /**
      * Calculates the subtotal of the order
+     * 
      * @return double which is the price of the order to 2 decimal places.
      */
     public double getSubtotal() {
@@ -120,6 +128,7 @@ public class Order implements Customizable {
 
     /**
      * Calculates the sales tax of the given order.
+     * 
      * @return double the sales tax.
      */
     public double getSalesTax() {
@@ -130,6 +139,7 @@ public class Order implements Customizable {
 
     /**
      * Gets the total cost of the order which is subtotal + salestax.
+     * 
      * @return double the total cost.
      */
     public double getTotal() {
@@ -140,6 +150,7 @@ public class Order implements Customizable {
 
     /**
      * Formatted string of the order separated by new lines.
+     * 
      * @return String which is the formatted string of the order
      */
     public String toString() {
@@ -151,6 +162,5 @@ public class Order implements Customizable {
         }
         return output;
     }
-
 
 }

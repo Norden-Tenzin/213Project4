@@ -18,6 +18,7 @@ import static source.Main.allOrders;;
 
 /**
  * Controller class for current orders. Handles UI Logic.
+ * 
  * @Tenzin Norden, @Vedant Mehta
  */
 public class CurrentOrderController {
@@ -40,44 +41,45 @@ public class CurrentOrderController {
 
     /**
      * Removes an item from the orderlist.
+     * 
      * @param event is triggered when the user clicks the Remove button.
      */
     @FXML
     void removeItem(ActionEvent event) {
         MenuItem tmpItem;
-        if(orderList.getSelectionModel().getSelectedIndex()!=-1){
+        if (orderList.getSelectionModel().getSelectedIndex() != -1) {
             Object obj = orderList.getSelectionModel().getSelectedItem();
-            
-            String [] donutString = obj.toString().split(",");
-            if(donutString.length==2){
+
+            String[] donutString = obj.toString().split(",");
+            if (donutString.length == 2) {
                 tmpItem = new Coffee(donutString[1].split(" ")[0]);
-                if(donutString[1].split(" ").length>=2){
-                    String[]addons = donutString[1].split(" ")[1].split("\\+");
-                    for(String item : addons){
-                        if(!item.equals(""))
-                        ((Coffee)tmpItem).add(item);
+                if (donutString[1].split(" ").length >= 2) {
+                    String[] addons = donutString[1].split(" ")[1].split("\\+");
+                    for (String item : addons) {
+                        if (!item.equals(""))
+                            ((Coffee) tmpItem).add(item);
                     }
                 }
+            } else {
+                tmpItem = new Donut(donutString[2], donutString[1]);
             }
-            else{
-                tmpItem = new Donut(donutString[2],donutString[1]);
-            }
-            
+
             tmpItem.itemPrice();
-            System.out.println(currOrder.toString());
-            //deleting from current order
+
+            // deleting from current order
             currOrder.remove(tmpItem);
-            System.out.println(currOrder.toString());
+
         }
         loadData();
         // ObservableList
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
-        taxValue.setText("$"+String.valueOf(currOrder.getSalesTax()));
-        totalValue.setText("$"+String.valueOf(currOrder.getTotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
+        taxValue.setText("$" + String.valueOf(currOrder.getSalesTax()));
+        totalValue.setText("$" + String.valueOf(currOrder.getTotal()));
     }
-    
-    /** 
+
+    /**
      * Handles submitting the order.
+     * 
      * @param event is triggered when the user clicks the submit order button.
      */
     @FXML
@@ -86,16 +88,16 @@ public class CurrentOrderController {
         currOrder = new Order();
 
         loadData();
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
-        taxValue.setText("$"+String.valueOf(currOrder.getSalesTax()));
-        totalValue.setText("$"+String.valueOf(currOrder.getTotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
+        taxValue.setText("$" + String.valueOf(currOrder.getSalesTax()));
+        totalValue.setText("$" + String.valueOf(currOrder.getTotal()));
     }
 
     /**
      * Used to initialize default values and images.
      */
     @FXML
-    void initialize(){
+    void initialize() {
         FileInputStream input;
         try {
             input = new FileInputStream("assets/cart.png");
@@ -105,11 +107,11 @@ public class CurrentOrderController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
         loadData();
-        subtotalValue.setText("$"+String.valueOf(currOrder.getSubtotal()));
-        taxValue.setText("$"+String.valueOf(currOrder.getSalesTax()));
-        totalValue.setText("$"+String.valueOf(currOrder.getTotal()));
+        subtotalValue.setText("$" + String.valueOf(currOrder.getSubtotal()));
+        taxValue.setText("$" + String.valueOf(currOrder.getSalesTax()));
+        totalValue.setText("$" + String.valueOf(currOrder.getTotal()));
     }
 
     /**
